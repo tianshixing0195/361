@@ -8,15 +8,15 @@
 	</head>
 	<body>
 		<header>
-			<div class="nav w">
-				<div class="nav-top">
+			<div class="nav">
+				<div class="nav-top w">
 					<ul class="r lang">
 						<li class="l"><a href="#">English</a></li>
 						<li class="l"><a href="#"><img src="img/area.jpg"/></a></li>
 					</ul>
 			    </div>
 			    <div class="navbtm ">
-			    	
+			    	<div class="w">
 			    		<h1><img src="img/logo.png"/></h1>
 			    		<div class="menu">
 				    	 	<ul>
@@ -25,6 +25,7 @@
 				    	 		<li class="l"><a href="#">新闻</a></li>
 				    	 		<li class="l"><a href="#">团购定制</a></li>
 				    	 	</ul>
+				    	 	
 			    	   	</div>
 			    	    <div class="search">
 			    	 		<input type="text" placeholder="查找鞋服"/>
@@ -42,11 +43,9 @@
 					    	    <input type="button" value="去逛逛" id="btnGo" />
 					    	</div>
 					    </div>
-			       </div>
-                  
+			        </div>
 			    </div>
-			</div>
-			   <div id="shoplist">
+			    <div id="shoplist">
 					<div class="mainlist l">
 					    <p><a href="#">新品上市</a></p>
 					    <p><a href="#">热卖上市</a></p>
@@ -86,7 +85,12 @@
 						<li><a href="#">篮球服</a></li>
 						<li><a href="#">裤装</a></li>
 					</ul>
-			    </div>  
+                </div> 	
+			    		
+                  
+			  </div>
+			     
+			</div>
 		</header>
 		<div id="banner">
 			
@@ -109,9 +113,9 @@
 					<a href="#"><img src="img/special3.jpg" /> </a>
 					<p class="masking">	</p>
 					<h2><a href="#">361°成为2018亚运会官方合作伙伴</a></h2>
-
+	
 				</div>
-			</div>
+		    </div>
 			<div id="shoes">
 				<dl class="l">
 					<dt><a href="#"><img src="img/recommend.jpg"/></a></dt>
@@ -126,7 +130,8 @@
 					<dd><a href="#">篮球产品入口</a></dd>
 				</dl>
 			</div>
-		</main>	
+		</main>
+
 		<footer>
 			<div class="w foot_nav">
 				<ul class="l">
@@ -206,81 +211,16 @@
 </html>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/getStyle.js" ></script>
+<script type="text/javascript" src="js/361base.js" ></script>
 <script type="text/javascript" src="js/fadeslider.js" ></script>
 
 <script type="text/javascript">
 	$(function(){
-		//购物菜单显示和隐藏
-		$("header .navbtm .shop").mouseenter(function(){
-			$("#shoplist").slideDown("slow");
-		});
-		$("#shoplist").mouseleave(function(){
-			$("#shoplist").slideUp("slow");
-		});
-		//购物车提示内容的显示和隐藏
-		$("header .navbtm .shopcar").mouseenter(function(){
-			$(".shopbox").slideDown("fast");
-		});
-		$(".shopbox").mouseleave(function(){
-			$(".shopbox").slideUp("fast");
-		});
-		//鼠标移上购物车里的按钮变色
-		$("#btnGo").mouseenter(function(){
-			$("#btnGo").css({background:"#fa0"});
-		});
-	    $("#btnGo").mouseleave(function(){
-			$("#btnGo").css({background:"#f60"});
-		});
-		//鼠标移到放大镜上搜索框显示
-		$(".searchul").mouseenter(function(){
-			$(".search").show("fast").delay(20).animate({
-				width:"230px"
-			});
-		});
+		addEvent();
 	    //轮播图
 	    new Slider($("#banner"),514,["img/banner.jpg","img/banner00717.jpg","img/banner0715.jpg"],
 			10,"#999","#f60",true,2000);
 				
-		//页面滚动 顶部悬浮$(window).scroll( function() { /* ...do something... */ } );
-		 let minHeight =50;
-		 $(window).scroll( function() {
-		 	let s=$(window).scrollTop();
-		 	
-		 	//console.log(s);
-		 	if (s>=minHeight) {
-		 		$(".nav-top").hide(100);
-			 	$(".navbtm ").css({
-			 		position:"fixed",
-			 		top:0,
-			 		left:0
-			 	});
-			 	$(".navbtm h1").css({
-			 		height:"36px",
-			 		width:"60px",
-			 		top:10,
-			 		left:20
-			 	},);
-		    }else{
-		    	$(".nav-top").show(100);
-		    	$(".navbtm ").css({
-			 		position:"relative"
-			 	});
-			 	$(".navbtm h1").css({
-			 		height:"52px",
-			 		width:"86px",
-			 		top:-10,
-			 		left:10
-			 	});
-		    }
-		 	
-		 	//回到顶部按钮显示
-		 	if (s>=500) {
-		 		$("#toTop").show();
-		 	}else{
-		 		$("#toTop").hide();
-		 	}
-		 
-		});
 		
 		//鼠标移到图片上文字和遮罩层显示
 		 $("#showbox div").mouseenter(function () {
@@ -306,20 +246,6 @@
 		 	},400);
 		 });
 		 
-		 //鼠标移到微信图标上二维码显示
-		$("footer .foot_nav .wechat").mouseenter(function(){
-			$("#erweima").show("slow");
-		});
-		$("footer .foot_nav .wechat").mouseleave(function(){
-			$("#erweima").hide("slow");
-		});
 		
-		//点击toTop,到达顶部
-		$("#toTop").click(function(){
-			$(window).animate({
-				scrollTop:0
-			},500);
-			
-		})
 	});
 </script>

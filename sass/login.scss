@@ -41,8 +41,8 @@ main{
            border: 1px solid blue; 
        }
        input:nth-of-type(4){
-           margin-top: 0;
-           width:$inputWidth;
+            margin-top: 0;
+            width:$inputWidth;
             background: #f60;
             color:$bgColor ;
             padding:0;
@@ -87,7 +87,7 @@ main{
             li{
                 display: inline-block;
                 margin: 10px;
-                font-size: 40px;
+                font-size: 38px;
             }
             li:first-child a{
                 color:#51b7ec;

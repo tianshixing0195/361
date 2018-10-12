@@ -20,16 +20,10 @@ function CheckAll(type,value){ //type是你要验证的类型（自定），valu
 
 			 case 'username':  //账户名只能使用数字字母下划线，
 		                       //且数字不能开头，长度在6-15之间
-			 var reg = /^[_a-zA-Z][_a-zA-Z0-9]{5,15}$/
+			 var reg = /\w{4,}/
 			  break;
-			  case 'password1':   //（必须包含字母、数字、特殊字符，长度6个字符以上）
-			  var reg = /[a-zA-Z]/; //字母
-			  break;
-			  case 'password2':   //（必须包含字母、数字、特殊字符，长度6个字符以上）
-			  var reg = /[0-9]/;  //数字
-			  break;
-			  case 'password3':
-			  var reg = /[#@\$%\^]/; //特殊字符
+			  case 'password':   //（必须包含字母、数字、特殊字符，长度6个字符以上）
+			  var reg = /\w{6,16}/; //字母
 			  break;
 			  // 出生年月 2000-2-30;
 			  case 'birthday':
@@ -52,24 +46,6 @@ function CheckAll(type,value){ //type是你要验证的类型（自定），valu
 		}
 		
 	return reg.test(value);
-}
-
-function getName(name1){
-	
-	  var str=name1;
-	  var reg=str.replace(/[^\u4e00-\u9fa5]/g,"");
-	  return reg;
-	  
-	
-}
-
-function filter(txt){
-	
-	  var str=txt;
-	  var reg=str.replace(/\123\102/ig;,"*");
-	  return reg;
-	  
-	
 }
 
 

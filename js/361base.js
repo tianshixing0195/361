@@ -1,5 +1,7 @@
-$(function(){
+function addEvent(){
+	
 		//购物菜单显示和隐藏
+		//console.log($("header .navbtm .shop"));
 		$("header .navbtm .shop").mouseenter(function(){
 			$("#shoplist").slideDown("slow");
 		});
@@ -83,4 +85,4 @@ $(function(){
 			},500);
 			
 		})
-	});
+}

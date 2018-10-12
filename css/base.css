@@ -39,39 +39,40 @@ a:hover{text-decoration:none; color:#f60;}
 
 
 /*========================top==================*/
-body{background: #000;}
-header{height: 110px;}
-.nav{ width: 98%; }
+body{ background: black;}
+header{height: 110px;background: #000;}
+.nav{ width: 100%; }
 .nav .nav-top{height: 12px;padding: 13px 0;}
 .nav .nav-top li{padding-right:10px ;}
 .nav .navbtm{height:72px;position: relative;width: 100%;z-index: 20;background: #000;}
-.navbtm h1{width: 86px; height: 52px; position: absolute;top:-10px;left: 10px;}
-.navbtm h1 img{width: 100%;height: 100%;}
-.navbtm .menu{height:38px;width: 300px;position: absolute;left:400px;top:30px;}
-.navbtm .menu ul li{margin:0 18px ;padding-bottom: 20px;}
-.navbtm .menu ul li a{color:#fff;}
-.navbtm .menu ul li.now{border-bottom: 2px solid #f99302;}
-.navbtm .menu ul li:hover{border-bottom: 2px solid #f99302;}
+.navbtm .w{height:100%;}
+.navbtm .w h1{width: 86px; height: 52px; position: absolute;top:-10px;left: 10px;}
+.navbtm .w h1 img{width: 100%;height: 100%;}
+.navbtm .w .menu{height:38px;width: 300px;position: absolute;left:400px;top:30px;}
+.navbtm .w .menu ul li{margin:0 18px ;padding-bottom: 20px;}
+.navbtm .w .menu ul li a{color:#fff;}
+.navbtm .w .menu ul li.now{border-bottom: 2px solid #f99302;}
+.navbtm .w .menu ul li:hover{border-bottom: 2px solid #f99302;}
 
-.navbtm .search{width:250px; height:28px;display: none; border: 1px solid #fff; border-radius: 14px;padding-left: 20px;position: absolute;right: 150px;top:24px;}
-.navbtm .search input{width: 190px;height:16px;margin:7px 0; background: black;border:0;color:#fff}
+.navbtm .w .search{width:250px; height:28px;display: none; border: 1px solid #fff; border-radius: 14px;padding-left: 20px;position: absolute;right: 150px;top:24px;}
+.navbtm .w .search input{width: 190px;height:16px;margin:7px 0; background: black;border:0;color:#fff}
 
-.navbtm .right ul li{margin-top:6px;}
-.navbtm .right ul{position: relative;width: 150px;height:28px;margin-right: 25px;margin-top: 25px;}
-.navbtm .right .searchul{display: inline-block; width:16px ;height: 17px;}
-.navbtm .right .person{margin-left: 40px; }
-.navbtm .right .shopcar{margin-left: 40px;}
-.navbtm .right .shopspan{display: inline-block;width:16px;height: 16px; border-radius: 50%;background: #F99302;color: #fff;
+.navbtm .w .right ul li{margin-top:6px;}
+.navbtm .w .right ul{position: relative;width: 150px;height:28px;margin-right: 25px;margin-top: 25px;}
+.navbtm .w .right .searchul{display: inline-block; width:16px ;height: 17px;}
+.navbtm .w .right .person{margin-left: 40px; }
+.navbtm .w .right .shopcar{margin-left: 40px;}
+.navbtm .w .right .shopspan{display: inline-block;width:16px;height: 16px; border-radius: 50%;background: #F99302;color: #fff;
                           position: absolute;right:12px;top:-2px;text-align: center;}
 
 /*========================鼠标移上显示的内容==================*/  
- #shoplist{height: 330px; background: #FFF; position: absolute;top:110px;width:100%;display: none;z-index: 5;box-shadow: 0px 5px 5px #aaa;}
+ #shoplist{height: 330px; background: #FFF; position: absolute;top:72px;width:100%;display: none;z-index: 5;box-shadow: 0px 5px 5px #aaa;}
  #shoplist .mainlist{width: 100px; border-right:1px solid #ccc ;height: 300px;padding-top: 30px;padding-left: 200px;}
  #shoplist .mainlist p{ height: 36px; line-height: 36px;font-weight: bold;}
  #shoplist .mainlist p a{color:#222;}
  #shoplist ul{width: 120px;margin-left: 30px; margin-top: 30px;} 
-  #shoplist ul li{height: 36px; line-height: 36px;}
-  #shoplist ul li.first a{color:#222;font-weight: bold;}
+ #shoplist ul li{height: 36px; line-height: 36px;}
+ #shoplist ul li.first a{color:#222;font-weight: bold;}
   
  .navbtm .right .shopbox{width: 300px; height: 180px; background: #fff; position: absolute; right: 20px;top:72px;border-radius: 8px; border: 1px solid #f9f;display: none;z-index: 10;} 
  .navbtm .right .shopbox p{text-align: center;height: 99px; line-height: 100px;}
@@ -79,7 +80,7 @@ header{height: 110px;}
  .navbtm .right .shopbox>div input{width: 250px; background: #FF6600; color: #fff;height: 40px;border:0;margin-top: 20px;border-radius: 5px;}
 
 /*========================footer=================*/ 
-footer{height: 383px;background: #222;width: 100%; margin-top: 50px;overflow:hidden; position: relative;}
+footer{height: 383px;background: #222;width: 100%;overflow:hidden; position: relative;}
 footer .foot_nav{height: 213px;width: 96%;padding-top: 60px;}
 footer .foot_nav ul{width: 140px;padding-left: 10px;}
 footer .foot_nav ul:last-of-type{width: 180px;}
