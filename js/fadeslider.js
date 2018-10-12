@@ -40,8 +40,10 @@ Slider.prototype.createUI= function(){
 			"backgroundImage":"url("+this.imgs[i]+")",
 			"background-position":"center",
 			"top":"0px",
-			width: this.width+"px",	
-			height:this.height+"px"	
+			width:this.width+"px",
+			height:this.height+"px",
+			"background-size":"cover"
+		    
 		});
 		
 		this.$box.append($img);
