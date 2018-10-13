@@ -13,10 +13,13 @@
 			<div id="login">
 				<h1><img src="../img/logo.png"/></h1>
 				<form>
-					<input type="text" name="userId" id="userid" value="" placeholder="请输入账号或手机号码" />
-					<input type="password" name="userPass" id="userpass" value="" placeholder="请输入密码" />
+					<input type="text" name="username" id="userid" value="" placeholder="请输入账号或手机号码" />
+					<input type="password" name="userpass" id="userpass" value="" placeholder="请输入密码" />
 					<input type="checkbox"  id="choose" value="" /><a href="">(记住我)两周内免登录</a>	
 					<input type="button" id="loginBtn" value="立即登录"/>
+					<span id="tipspan"></span>
+						
+					
 				</form>
 				<ul class="user">
 					<li><a href="#">忘记密码</a></li>
@@ -59,10 +62,26 @@
 			var d= new Date();
 			d.setDate(d.getDate()+14);
 			document.cookie = "yhm="+$("#userid").value+"; expires="+d.toGMTString();
-			
-			window.location.href="http://localhost/myProject/361/index.html";
+			//
+		
+			location.href = "../index.html";
+			//window.location.href="http://localhost/myProject/361/index.html";
 			
 			
 		});
 	})
+	function sendData () {
+		let data = $("form").serialize();
+		$.post("loginCheck.php",data,function (str) {
+			if (str=="0") {
+				
+			}else if (str=="1") {
+				alert("注册成功");
+				location.href = "../index.html";
+			}else{
+				alert("服务器出错，注册失败");
+			}
+			
+		});
+	}
 </script>

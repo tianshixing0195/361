@@ -50,6 +50,16 @@ main{
                 background: #F99302;
             }
        }
+       #tipspan{
+            height:16px;
+            width:450px;
+            font-size:10px;
+            color:red;
+            padding-left:30px;
+            background:red;
+            display: block;
+            //"display":"none"
+       }
     }
     ul.user{
         width: 100%;

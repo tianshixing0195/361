@@ -11,23 +11,24 @@
 		<main>
 			<div id="reg">
 				<h1>注册</h1>
-				<form method="post">
-					<span id="idspan"></span>
-					<input type="text" id="userid" placeholder="请输入昵称" value="" />
+				<form>
+					<span id="userspan"></span>
+					<input type="text" id="username" placeholder="请输入昵称" value="" name="userName" />
 					
 					<span id="cellspan"></span>
-					<span class="l phone">+86</span><input class="l" type="text" placeholder="请输入手机号" />
+					<span class="l phone">+86</span><input class="l" type="text" placeholder="请输入手机号" id="phoneNum" name="userPhone"/>
 					
 					<input type="text" id="math" placeholder="请输入右边算法的结果" class="l" />
 					<span class="mathImg l"><img src="../img/verify (3).jpg"/></span><a class="l changeImg" href="#">换一张</a>
 					
-					<span id="codespan"></span>
-					<input type="text" id="code" value="请输入短信验证码" />
-		            <a href="#" class="code">获取短信验证码</a>
+					<span id="codespan" class="l"></span>
+					<input type="text" id="code"  placeholder="请输入短信验证码" class="l"/>
+		            <a href="#" class="code l">获取短信验证码</a>
 		            
-		            <span id="passspan"> </span>
-					<input type="password"  id="userpass" placeholder="请输入6至16位密码" />
-					<input type="password"  id="userpass" placeholder="请重复输入6至16位密码" />
+		            <span id="passSpan"> </span>
+					<input type="password"  id="userpass" placeholder="请输入6至16位密码" name="userPass"/>
+					<span id="samePassSpan"> </span>
+					<input type="password"  id="samePass" placeholder="请重复输入6至16位密码" />
 					
 					<div class="checkbox l"></div><a href="#" class="l">我已阅读并同意<<361°商城协议>></a>	
 					
@@ -42,7 +43,6 @@
 </html>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
-<script type="text/javascript" src="../js/myRegExpTools.js" ></script>
 <script type="text/javascript" src="../js/ajax.js" ></script>
 <script type="text/javascript">
 	$(function () {
@@ -52,21 +52,158 @@
 		$("footer").load("footer.html",function(){
 			addEvent()
 		});
-		
-		//正则验证
-		//1.用户名
+
 		 $("#loginBtn").click(function(){
-		   
-             let test1 = CheckAll('username',$("#userid").value);
-              
-           	 if(test1){
-           	     $("#idspan").innerHTML= "昵称输入合法";
-           	 }else{
-           	     $("#idspan").innerHTML="*昵称不能为空";
-           	 }
-           	 
+            checkAll ();
+            sendData ();
+
            }) ;
+           
 		
 	})
 	
+    //正则验证   
+	function checkAll () {
+		//正则表达式
+		 var regusername = /^[\u4E00-\u9FA5A-Za-z0-9_]+$/;
+         var regphone = /^1[3-9]\d{9}$/; 
+         var regcode = /^\w{6,8}$/;
+         var regpass = /^\w{6,20}$/;
+		//每个span的css
+		      $("#userspan").css({
+              	"height":"16px",
+              	
+              	"font-size":"10px",
+              	"color":"red",
+              	"padding-left":"30px",
+              	"display":"none"
+              	
+              });
+              $("#cellspan").css({
+              	"height":"16px",
+              	
+              	"font-size":"10px",
+              	"color":"red",
+              	"padding-left":"30px",
+              	"display":"none"
+              	
+              });
+              $("#codespan").css({
+                "height":"16px",
+              	"width":"450px",
+              	"font-size":"10px",
+              	"color":"red",
+              	"padding-left":"30px",
+              	"display":"none"
+              	
+              	
+              });
+              $("#passSpan").css({
+              	"height":"16px",
+              	"width":"450px",
+              	"float":"left",
+              	"font-size":"10px",
+              	"color":"red",
+              	"padding-left":"30px",
+              	"display":"none"
+              	
+              });
+              $("#samePassSpan").css({
+              	"height":"16px",
+              	"width":"450px",
+              	"font-size":"10px",
+              	"color":"red",
+              	"padding-left":"30px",
+              	//"background":"red",
+              	"display":"none"
+              	
+              });
+
+              //正则判断
+              //1.用户名
+            let name = $("#username").val();
+            let matchResult1 = regusername.test(name);
+           	 if(!matchResult1){
+           	 	 $("#userspan").css({
+           	 	     "display":"block"	
+           	 	 });
+                 $("#userspan").text("*昵称不能为空");
+           	 }
+           	   //2.手机号
+           	let userphone = $("#phoneNum").val();
+           	if (userphone != "") {
+           		//let test2 = CheckAll('phone',userphone);
+           		let matchResult2 = regphone.test(userphone);
+		           	 if(!matchResult2){
+		           	 	 $("#cellspan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+		                 $("#cellspan").text("*请输入正确的手机号码");
+		           	 }
+           	}else{
+           		  $("#cellspan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+           		  $("#cellspan").text("*手机号码不能为空");
+           	}
+           
+           	   //3.验证码
+            let code = $("#code").val();
+           	if (code != "") {
+           		let matchResult3 = regcode.test(code);
+		           	 if(!matchResult3){
+		           	 	 $("#codespan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+		                 $("#codespan").text("*请输入正确的验证码");
+		           	 }
+           	}else{
+           		  $("#codespan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+           		  $("#codespan").text("*验证码不能为空");
+           	};
+           	//4.密码
+            let pass1 = $("#userpass").val();
+		    let pass2 = $("#samePass").val();
+		    
+           	if (pass1 != "") {
+           		let matchResult4 = regpass.test(pass1);
+		           	 if(!matchResult4){
+		           	 	 $("#passSpan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+		                 $("#passSpan").text("*请输入正确的密码");
+		           	 }
+           	}else{
+           		  $("#passSpan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+           		  $("#passSpan").text("*密码不能为空");
+           	};
+           	if (pass1!=pass2) {
+           		$("#samePassSpan").css({
+		           	 	     "display":"block"	
+		           	 	 });
+           		$("#samePassSpan").text("*两次输入的密码不一致，请重新输入");
+           	}
+           	
+	}
+	function sendData () {
+		let data = $("form").serialize();
+		$.post("regSave.php",data,function (str) {
+			if (str=="-1") {
+				 $("#userspan").css({
+           	 	     "display":"block"	
+           	 	 });
+                 $("#userspan").text("*此昵称已经有人使用，请重新输入");
+			}else if (str=="1") {
+				alert("注册成功");
+				location.href = "../index.html";
+			}else{
+				alert("服务器出错，注册失败");
+			}
+			
+		});
+	}
 </script>

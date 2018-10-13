@@ -20,7 +20,7 @@ function CheckAll(type,value){ //type是你要验证的类型（自定），valu
 
 			 case 'username':  //账户名只能使用数字字母下划线，
 		                       //且数字不能开头，长度在6-15之间
-			 var reg = /\w{4,}/
+			 var reg = /^[\u4E00-\u9FA5A-Za-z0-9_]+$/
 			  break;
 			  case 'password':   //（必须包含字母、数字、特殊字符，长度6个字符以上）
 			  var reg = /\w{6,16}/; //字母
