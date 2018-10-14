@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+//全局变量
+$Width:350px;
+$Height:350px;
+$bgColor:white;
+$color:#f70;
+$pHeight:30px;
+$font-size:16px;
+$bordeRadius:5px;
+$border:1px solid #bbb;
+$marginWidth:20px ;
+$marginHeight:20px;
+$boxshadow:0px 6px 4px #eee,5px 5px 3px #eee,0px 20px 0px #bbb,-5px 5px 3px #eee;
+
+#banner{
+    width: 100%;
+    height: 374px;
+    background: url(../img/shopImg/banner.jpg) center;
+    background-size: cover;
+}
+#sport{
+    width: 100%;
+    height: 366px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    .small{
+        height: 100%;
+        width: 393px;
+        //border: $border;
+        border-radius: $bordeRadius;
+        margin-right: 5px;
+        background: url(../img/shopImg/new_product.jpg) center no-repeat;
+        background-size: cover;
+        cursor: pointer;
+        &:hover{
+           // box-shadow:$boxshadow ;
+            background-size:105% 105% ;
+        }
+    }
+    .big{
+        height: 100%;
+        width: 778px;
+        border-radius: $bordeRadius;
+        background: url(../img/shopImg/new_banner.jpg) center no-repeat;
+        background-size: cover;
+        cursor: pointer;
+        &:hover{
+           // box-shadow:$boxshadow ;
+            background-size:105% 105% ;
+        }
+    }
+   
+}

@@ -19,7 +19,7 @@
 					<span class="l phone">+86</span><input class="l" type="text" placeholder="请输入手机号" id="phoneNum" name="userPhone"/>
 					
 					<input type="text" id="math" placeholder="请输入右边算法的结果" class="l" />
-					<span class="mathImg l"><img src="../img/verify (3).jpg"/></span><a class="l changeImg" href="#">换一张</a>
+					<span class="mathImg l"><img id="imgshow" src="../img/verify (1).jpg"/></span><a class="l changeImg" href="#">换一张</a>
 					
 					<span id="codespan" class="l"></span>
 					<input type="text" id="code"  placeholder="请输入短信验证码" class="l"/>
@@ -52,12 +52,19 @@
 		$("footer").load("footer.html",function(){
 			addEvent()
 		});
-
+        //点击按钮进行验证和发送请求
 		 $("#loginBtn").click(function(){
             checkAll ();
             sendData ();
 
            }) ;
+           
+           let arr = getImg();
+          $("form .changeImg").click(function(){
+          	 let index=parseInt(Math.random()*34);
+            $("#imgshow").src =arr[index];
+             //src="../img/verify (1).jpg"
+          });
            
 		
 	})
@@ -206,4 +213,12 @@
 			
 		});
 	}
+    
+    function getImg () {
+    	let imglist = [];
+    	for (let i=1;i<34;i++) {
+    		imglist.push("../img/verify ("+i+").jpg");
+    	}
+    	return imglist;
+    }
 </script>

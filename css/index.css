@@ -3,6 +3,7 @@
 /*========================banner==================*/  
 #banner{width: 100%;height:514px ;}
 /*========================main==================*/ 
+main{background: black;}
 #showbox{height: 730px;}
 #showbox .imgbox1{height: 730px;width: 585px;margin-top: 25px;overflow: hidden; position: relative;}
 #showbox .imgbox1 img{height:100%; width: 100%;}
@@ -16,7 +17,7 @@
 
 
 
-#shoes{height: 370px;position: relative; margin-top: 50px;margin-bottom: 50px;}
+#shoes{height: 370px;position: relative; margin-top: 50px;padding-bottom: 50px;}
 #shoes dl{height: 100%;width: 32%;margin-left: 2%;}
 #shoes dl:first-child{margin-left: 0;}
 #shoes dl dt{height: 296px;}
