@@ -14,6 +14,20 @@
 				<div class="l small"></div>
 				<div class="big l"></div>
 			</div>
+			<section id="newGoods">
+				<h2>新品推荐</h2>
+				<div class="goodsShow">
+					<div class="l">
+						<div></div>
+						<ul>
+							<li class="l"></li>
+						</ul>	
+						<h3>男常规跑鞋</h3>
+						<p>￥ 299.00</p>
+					</div>
+					
+				</div>
+			</section>
 		</main> 
 		<footer></footer>
 		
@@ -23,11 +37,162 @@
 <script type="text/javascript" src="../js/361base.js" ></script>
 <script type="text/javascript">
 	$(function () {
+		
+		//添加header和footer的html文件并引用Js.
 		$("header").load("header.html",function(){
 			addEvent()
 		});
 		$("footer").load("footer.html",function(){
 			addEvent()
 		});
-    });  
+		
+		//鼠标移到#sport上添加动画效果
+		$("#sport").children("div").hover(
+			function () {
+				$(this).animate({
+					"background-size":"105%"				
+				},400);
+			},
+			function () {
+				$(this).animate({
+				"background-size":"100%",
+				
+			    },400);
+			}
+		);
+		
+		createUI(["../img/shopImg/b_5a1fa80319851.jpg","../img/shopImg/b_5a1fa8045da3c.jpg","../img/shopImg/b_5a1fa805a349e.jpg"],
+			    ["../img/shopImg/m_5a1fa80319851.jpg","../img/shopImg/m_5a1fa8045da3c.jpg","../img/shopImg/m_5a1fa805a349e.jpg"]);
+		
+		$("#newGoods .goodsShow").children("div").hover(
+			function () {
+				$(this).css({
+					"box-shadow":"3px 5px 5px #ddd,3px 5px 5px #ddd,0px 15px 15px #ddd,-3px 5px 5px #ddd"
+				});
+				 $(this).children("ul").slideToggle(100)
+		   },
+		   function () {
+		   	    $(this).css({
+					"box-shadow":"none"
+				});
+			   	$(this).children("ul").slideToggle(100)
+		   }
+		);
+		
+		
+		
+    }); 
+    //物品展示
+    function createUI(imgs,liBgImgs) {
+    	let $imgs = null;//这是个jQuery对象，存储所有的img标签,
+	    let $lis = null;//这是个jQuery对象,存储所有的li标签,
+    	//let imgs = imgs;//图片数组
+    	//let liBgImgs = liImgs; //下面豆豆的图片
+    	//大盒子
+    	let $bigBox = $("<div></div>");
+    	$bigBox.css({
+			float:"left",
+			width:"350px",
+			//height:"500px",
+			border:"1px solid #bbb",
+			"border-radius":"5px",
+			margin:"0 20px"
+		});
+		$("#newGoods .goodsShow").append($bigBox);
+		
+		//展示图片的盒子
+		let $imgBox = $("<div></div>");
+		$imgBox.css({
+			width:"350px",
+			height:"350px",
+			position:"relative",
+		    overflow:"hidden"
+			
+		});
+		$bigBox.append($imgBox);
+		
+		for(let i=0;i<imgs.length;i++){
+		let $img = $("<img/>");
+		$img.css({
+		   "position":"absolute",
+			"backgroundImage":"url("+imgs[i]+")",
+			"background-position":"center",
+		   "top":"0px",
+			width:"350px",
+			height:"350px",
+			"background-size":"cover"
+		    
+		});
+		$imgBox.append($img);
+		//把创建的图片标签放入数组中
+		if($imgs==null){
+			$imgs=$img;
+		}else{
+			$imgs = $imgs.add($img);
+			
+		}
+	}	
+		//下方小图片的盒子
+		//ul
+		let $ulBox = $("<ul></ul>");
+		$ulBox.css({
+			width:"350px",
+			height:"50px",
+			"background":"#f00",
+			display:"none"
+		});
+		$bigBox.append($ulBox);
+		
+		//li
+		for(let i=0;i<liBgImgs.length;i++){
+		    let $liBox = $("<li></li>");
+			$liBox.css({
+				float:"left",
+				width:"70px",
+				height:"100%",
+				"margin":"0 10px",
+				"backgroundImage":"url("+liBgImgs[i]+")",
+				"background-position":"center",
+				"background-size":"cover"
+			});
+			$ulBox.append($liBox);
+		   	$lis==null?$lis=$liBox:$lis=$lis.add($liBox);
+		   	$liBox.mouseenter(function(){
+				let curImg=$(this).css("backgroundImage");
+				$(this).parent().prev().children().css("backgroundImage",curImg)
+			});
+		}
+		
+		
+		
+		
+		//文字的盒子
+		let $titleBox = $("<h3></h3>");
+		$titleBox.css({
+			width:"100%",
+			height:"20px",
+            "text-align": "center",
+            "font-size": "16px",
+            "font-weight": "normal",
+            "background":"#0f0",
+            "margin-top": "14px"
+		});
+		$titleBox.text("男常规跑鞋");
+		$bigBox.append($titleBox);
+		
+		//价格的盒子
+		let $priceBox = $("<p></p>");
+		$priceBox.css({
+			width:"100%",
+			height:"40px",
+            "text-align": "center",
+            "font-size": "14px",
+            "background":"#0ff",
+            color:"#f60",
+            "padding-top": "14px"
+		});
+		$priceBox.text("￥359.00");
+		$bigBox.append($priceBox);
+    }
+    
 </script>

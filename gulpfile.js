@@ -31,6 +31,12 @@ gulp.task('copy-js',function(){
 	.pipe(gulp.dest(basepath+"\\js"));
 });
 
+
+gulp.task('copy-json',function(){
+	gulp.src("json/*.json")
+	.pipe(gulp.dest(basepath+"\\json"));
+});
+
 //sass的编译
 gulp.task("sass",function(){
 	gulp.src("sass/*.scss")
@@ -40,7 +46,7 @@ gulp.task("sass",function(){
 
 
 //多个任务一起执行
-gulp.task("build",["copy-html1","copy-html2","copy-img","copy-js","copy-css","sass"],function(){
+gulp.task("build",["copy-html1","copy-html2","copy-img","copy-js","copy-json","copy-css","sass"],function(){
 	console.log("ok");
 });
 
@@ -52,6 +58,7 @@ gulp.task("watchall",function(){
 	gulp.watch("html/*.html",["copy-html2"]);
 	gulp.watch("img/**/*",["copy-img"]);
 	gulp.watch("js/*.js",["copy-js"]);
+	gulp.watch("json/*.json",["copy-json"]);
 	gulp.watch("css/*.css",["copy-css"]);
 	gulp.watch("sass/*.scss",["sass"]);
 	

@@ -11,8 +11,8 @@ $bordeRadius:5px;
 $border:1px solid #bbb;
 $marginWidth:20px ;
 $marginHeight:20px;
-$boxshadow:0px 6px 4px #eee,5px 5px 3px #eee,0px 20px 0px #bbb,-5px 5px 3px #eee;
-
+$boxshadowLB:3px 5px 5px #ddd,0 0 0 #eee,0px 15px 15px #ddd,-3px 5px 5px #ddd;
+$boxshadowRB:3px 5px 5px #ddd,3px 5px 5px #ddd,0px 15px 15px #ddd,0 0 0 #eee;
 #banner{
     width: 100%;
     height: 374px;
@@ -23,7 +23,7 @@ $boxshadow:0px 6px 4px #eee,5px 5px 3px #eee,0px 20px 0px #bbb,-5px 5px 3px #eee
     width: 100%;
     height: 366px;
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     .small{
         height: 100%;
         width: 393px;
@@ -31,24 +31,99 @@ $boxshadow:0px 6px 4px #eee,5px 5px 3px #eee,0px 20px 0px #bbb,-5px 5px 3px #eee
         border-radius: $bordeRadius;
         margin-right: 5px;
         background: url(../img/shopImg/new_product.jpg) center no-repeat;
-        background-size: cover;
+        background-size: 100%;
         cursor: pointer;
-        &:hover{
-           // box-shadow:$boxshadow ;
-            background-size:105% 105% ;
-        }
+       
+      &:hover{
+          box-shadow:$boxshadowLB ;
+      }
     }
     .big{
         height: 100%;
         width: 778px;
         border-radius: $bordeRadius;
         background: url(../img/shopImg/new_banner.jpg) center no-repeat;
-        background-size: cover;
+        background-size: 100%;
         cursor: pointer;
+       
         &:hover{
-           // box-shadow:$boxshadow ;
-            background-size:105% 105% ;
-        }
+            box-shadow:$boxshadowRB ;
+     }
     }
    
+}
+
+#newGoods{
+    width: 100%;
+    height: 1200px;
+    
+    border: $border;
+    margin-bottom: $marginHeight;
+    overflow:hidden;
+    h2{
+        height: 66px;
+        line-height: 66px;
+        font-size: 26px;
+        font-weight: normal;
+        padding-left: 20px;
+        
+    }
+    .goodsShow{
+        width: 100%;
+        height:1100px;
+        //background: #0086B3;
+        border:$border;
+        cursor: pointer;
+        
+    }
+    .goodsShow>div:first-of-type{
+        width: 350px;
+        //height: 500px;
+        background: greenyellow;
+        border:$border;
+        border-radius: $bordeRadius;
+        margin-right: 20px;
+        margin-left: 20px;
+//      &:hover{
+//          box-shadow:3px 5px 5px #ddd,3px 5px 5px #ddd,0px 15px 15px #ddd,-3px 5px 5px #ddd
+//      }
+        div{
+            width: 100%;
+            height: 350px;
+            background: url(../img/shopImg/b_5a1faa05c23db.jpg) center no-repeat;
+            background-size: 100%;
+           
+        }
+        ul{
+            width: 100%;
+            height: 50px;
+            background:indianred;
+            display: none;
+            li{
+              width: 70px;
+              height: 50px;
+              margin:0 10px;
+              background: url(../img/shopImg/m_5a1faa05c23db.jpg) center no-repeat;
+              background-size: 100%;  
+            }
+        }
+        h3{
+            width:100%;
+            text-align: center;
+            font-size: 16px;
+            font-weight: normal;
+            margin-top: 14px;
+            
+        }
+        p{
+            width:100%;
+            height: 40px;
+            padding-top: 14px;
+            text-align: center;
+            font-size: 14px;
+            color: #FF6600; 
+        }
+    }
+    
+    
 }
