@@ -2,64 +2,100 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>商城</title>
+		<title>商品列表</title>
 		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/shop.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/shopList.css"/>
 	</head>
 	<body>
 		<header></header>
-		<div id="banner"></div>
-		<main class="w">
-			<div id="sport">
-				<div class="l small"></div>
-				<div class="big l"></div>
-			</div>	
+	     <main>
+	     	<div id="list">
+	     		<div class="w top">
+	     			<p class="l">所有分类><span>所有商品</span></p>
+	     			<p class="r">搜索到<span id="count">1110</span>件商品</p>
+	     		</div>
+	     	</div>
+     		<div id="main">
+     			<div class="w">
+     				<ul>
+     					<span class="l">产品分类</span>
+     					<li class="l"><a href="#">鞋</a></li>
+     					<li class="l"><a href="#">上装</a></li>
+     					<li class="l"><a href="#">下装</a></li>
+     					<li class="l"><a href="#">泳镜</a></li>
+     					<li class="l"><a href="#">泳帽</a></li>
+     					<li class="l"><a href="#">泳衣</a></li>
+     					<li class="l"><a href="#">配件</a></li>
+     					<li class="l"><a href="#">新品上市</a></li>
+     				</ul>
+     				<ul>
+     					<span class="l">性别</span>
+     					<li class="l"><a href="#">女</a></li>
+     					<li class="l"><a href="#">男</a></li>
+     					<li class="l"><a href="#">女童</a></li>
+     					<li class="l"><a href="#">男童</a></li>
+     					<li class="l"><a href="#">男女同款</a></li>
+     	
+     				</ul>
+     				<ul>
+     					<span class="l">科技</span>
+     					<li class="l"><a href="#">NFO磁悬浮</a></li>
+     					<li class="l"><a href="#">BOUNDAIR°</a></li>
+     					<li class="l"><a href="#">气悬浮科技</a></li>
+     					<li class="l"><a href="#">超强避震</a></li>
+     					<li class="l"><a href="#">特种橡胶花纹</a></li>
+     					<li class="l"><a href="#">双悬浮科技</a></li>
+     					<li class="l"><a href="#">FLEXI易窝</a></li>
+     					<li class="l"><a href="#">SPONGEE</a></li>
+     					<span class="l"><a href="#">更多+</a></span>
+     				</ul>
+     				<ul>
+     					<span class="l">功能</span>
+     					<li class="l"><a href="#">海外</a></li>
+     					<li class="l"><a href="#">时尚休闲</a></li>
+     					<li class="l"><a href="#">篮球</a></li>
+     					<li class="l"><a href="#">跑步</a></li>
+     					<li class="l"><a href="#">足球</a></li>
+     					<li class="l"><a href="#">小球类</a></li>
+     					<li class="l"><a href="#">户外</a></li>
+     					<li class="l"><a href="#">综训</a></li>
+     				</ul>
+     			</div>
+     		</div>
+     		<div class="w sort">
+     			<ul>
+     				<span class="l">排序方式</span>
+     				<li class="l"><a href="">综合排序</a></li>
+     				<li class="l"><a href="">销量</a></li>
+     				<li class="l"><a href="">价格</a></li>
+     			</ul>
+     		</div>
+	     
 		</main> 
-		<footer></footer>
 		
+		<footer style="margin-top: 50px;"></footer>
 	</body>
 </html>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
 <script type="text/javascript">
-	$(function () {
+	
+   $(function(){
 		
 		//添加header和footer的html文件并引用Js.
 		$("header").load("header.html",function(){
 			addEvent()
 		});
+		getData ();
 		$("footer").load("footer.html",function(){
 			addEvent()
 		});
-		
-		sportGo ();
-		getData ();
-		
-		
-    }); 
-    
-    function sportGo () {
-			//鼠标移到#sport上添加动画效果
-		$("#sport").children("div").hover(
-			function () {
-				$(this).animate({
-					"background-size":"105%"				
-				},400);
-			},
-			function () {
-				$(this).animate({
-				"background-size":"100%",
-				
-			    },400);
-			}
-		);
-	}
-    
+    });  
    
     //获取数据
     function getData () {
-    	$.getJSON("../json/goodsList.json",function(data){
-    		//console.log(data);
+    	$.getJSON("../json/allshopList.json",function(data){
+    		console.log(data);
     		createUI(data);
     		
     	})
@@ -74,34 +110,33 @@
         	let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
         	  $sectionBox.css({
 								width: "100%",
-						        height:"1100px",
-						 
+								"height":"auto",
 						        "margin-bottom":"20px",
-                                "overflow":"hidden" 
+                                "position":"relative",
 							});
             $("main").append($sectionBox); 
         
-                 //创建标题和商品盒子
-        	    let $h2 = $("<h2></h2>");
-      	      $h2.css({
-						    width: "100%",
-						    height:"66px",						        
-						    "line-height": "66px",
-					        "font-size": "26px",
-					       "font-weight":" normal",
-					        "padding-left": "20px"
-					       
-							});
-        	    $h2.text(goodsList[i].h2);
+//               //创建标题和商品盒子
+//      	    let $h2 = $("<h2></h2>");
+//    	      $h2.css({
+//						    width: "100%",
+//						    height:"66px",						        
+//						    "line-height": "66px",
+//					        "font-size": "26px",
+//					       "font-weight":" normal",
+//					        "padding-left": "20px"
+//					       
+//							});
+//      	    $h2.text(goodsList[i].h2);
         	    
         	    let $shopBox = $("<div></div>");
         	     $shopBox.css({
 								width: "100%",
-						        height:"1000px"
+						        height:"auto"
 						       
 						      
 							});
-        	    $sectionBox.append($h2);
+        	    //$sectionBox.append($h2);
         	    $sectionBox.append($shopBox);     
          
         	    let lists = goodsList[i].goods;

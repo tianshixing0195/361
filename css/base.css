@@ -79,7 +79,7 @@ header{height: 110px;background: #000;}
  .navbtm .right .shopbox>div input{width: 250px; background: #FF6600; color: #fff;height: 40px;border:0;margin-top: 20px;border-radius: 5px;}
 
 /*========================footer=================*/ 
-footer{height: 383px;background: #222;width: 100%;overflow:hidden; position: relative;}
+footer{height: 383px;background: #222;width: 100%;overflow:hidden; position: relative; }
 footer .foot_nav{height: 213px;width: 96%;padding-top: 60px;}
 footer .foot_nav ul{width: 140px;padding-left: 10px;}
 footer .foot_nav ul:last-of-type{width: 180px;}

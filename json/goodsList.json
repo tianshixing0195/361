@@ -1,0 +1,46 @@
+{
+    "CATALOG": [
+        {
+            "h2": "新品推荐",
+            "goods": [
+                {   "imgurl" :["../img/shopImg/m_5a1faa0483d2c.jpg","../img/shopImg/m_5a1faa05c23db.jpg","../img/shopImg/m_5a1faa070d5cf.jpg","../img/shopImg/m_5a1faa0850a6b.jpg"],
+			        "title" : "男常规跑鞋",
+			        "price" : "￥299.00"
+                },
+                 {   "imgurl" :["../img/shopImg/m_5a1fa80319851.jpg","../img/shopImg/m_5a1fa8045da3c.jpg","../img/shopImg/m_5a1fa805a349e.jpg"],
+			        "title" : "男常规跑鞋",
+			        "price" : "￥359.00"
+                },
+                {   "imgurl" :["../img/shopImg/m_5a1fa6489bd26.jpg","../img/shopImg/m_5a1fa649db99f.jpg","../img/shopImg/m_5a1fa66f712cc.jpg","../img/shopImg/m_5a1fa670ad831.jpg"],
+			        "title" : "男常规跑鞋",
+			        "price" : "￥359.00"
+                },
+                 {   "imgurl" :["../img/shopImg/m_5a1fa45c47ed4.jpg","../img/shopImg/m_5a1fa45d92d44.jpg","../img/shopImg/m_5a1fa45ed6ca3.jpg"],
+			        "title" : "男常规跑鞋",
+			        "price" : "￥269.00"
+                }
+            ]
+         },
+         {
+         "h2": "热销产品", 
+         "goods":[
+                {   "imgurl" :["../img/shopImg/m_5a1f7d1162930.jpg","../img/shopImg/m_5a1f7d12ac7c8.jpg","../img/shopImg/m_5a1f7d3d1de70.jpg","../img/shopImg/m_5a1f7d3e4efb0.jpg"],
+			        "title" : "女跑步文化鞋",
+			        "price" : "￥249.00"
+                },
+                 {   "imgurl" :["../img/shopImg/m_5a1faf2526511.jpg","../img/shopImg/m_5a1faf26597f9.jpg","../img/shopImg/m_5a1faf2792689.jpg"],
+			        "title" : "男篮球文化鞋",
+			        "price" : "￥329.00"
+                },
+                {   "imgurl" :["../img/shopImg/m_5a2280a6ae9ef.jpg","../img/shopImg/m_5a2280a7e1e54.jpg","../img/shopImg/m_5a2280a92620d.jpg"],
+			        "title" : "男跑鞋",
+			        "price" : "￥239.00"
+                },
+                 {   "imgurl" :["../img/shopImg/m_5a227f8e89f00.jpg","../img/shopImg/m_5a227f8fc0399.jpg"],
+			        "title" : "男篮球文化鞋",
+			        "price" : "￥429.00"
+                }
+            ]
+        }
+    ]
+}   

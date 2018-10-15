@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+//全局变量
+$Width:350px;
+$Height:350px;
+$bgColor:white;
+$color:black;
+
+$pHeight:30px;
+$font-size:16px;
+$bordeRadius:5px;
+$border:1px solid #bbb;
+$marginWidth:20px ;
+$marginHeight:20px;
+
+#list{
+    width: 100%;
+    
+    margin-top: 50px;
+    margin-bottom: 40px;
+    .top{
+        height: 26px;
+       
+        background: red;
+        margin-bottom:$marginWidth;
+        p{  height:26px;
+            line-height:26px;
+             
+             background: #55A532;
+            font-size: 12px;
+        } 
+        p:nth-of-type(1){
+            float: left;
+            span{
+                font-size: 14px;
+                color:#000;
+            }
+           
+        }
+        p:nth-of-type(2){
+            float: right;
+          
+        }
+     
+    } 
+}
+
+ #main{
+        margin-top: $marginHeight;
+        height: 240px;
+        border-bottom: $border;
+         border-top: $border;
+        ul{
+            height: 60px;
+            
+            border-bottom: $border;
+            span{
+              height: 52px;
+              line-height: 52px;
+              width: 65px;
+              text-align-last: justify;
+              font-size: 13px;
+               
+              margin-top: 5px; 
+              margin-right: 40px;
+            }
+            li{
+               height: 52px;
+               line-height: 52px;
+               margin-top: 5px;
+               width:100px;  
+            }
+        }
+        ul:last-of-type{
+             border-bottom:0;
+        }
+       
+    
+    }
+.sort{
+    background: #f7f7f7;
+    height: 50px;
+    line-height: 50px;
+     margin-bottom:25px; 
+     margin-top: 60px;
+    ul{
+       height: 50px;
+       line-height: 50px;
+       span{
+           height: 100%;
+           width: 107px;
+           text-align: center;
+       }
+       li{
+          height: 100%;
+          padding: 0 22px;
+          a{
+              color:#222;
+          } 
+       }
+       li:first-of-type a{
+           color: #F99302;
+       }
+      
+    }
+}
+  
