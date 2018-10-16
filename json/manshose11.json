@@ -1,0 +1,31 @@
+{
+    "CATALOG": [
+        {
+            "title": "男常规跑鞋",
+            "price":"￥289.00",
+            "currPrice":"299.00",
+            "goods": [
+                {  
+                	 "imgurl" :["../img/manshoseImg/5a1faa0483d2c.jpg","../img/manshoseImg/5a1faa04cdba4.jpg","../img/manshoseImg/5a1faa052aee2.jpg","../img/manshoseImg/5a1faa057887e.jpg"],
+			        "color" : "361度白/乌黑色 "
+			        
+                },
+                {   "imgurl" :["../img/manshoseImg/5a1faa05c23db.jpg","../img/manshoseImg/5a1faa061a096.jpg","../img/manshoseImg/5a1faa06663f2.jpg","../img/manshoseImg/5a1faa06b130a.jpg"],
+			        "color" : "军装绿/乌黑色"
+			        
+                },
+                {   
+                	"imgurl" :["../img/manshoseImg/5a1faa070d5cf.jpg","../img/manshoseImg/5a1faa075a6df.jpg","../img/manshoseImg/5a1faa07a9521.jpg","../img/manshoseImg/5a1faa0804484.jpg"],
+			        "color" : "亚麻褐/深泥棕"
+			       
+                },
+                {   
+                	"imgurl" :["../img/manshoseImg/5a1faa0850a6b.jpg","../img/manshoseImg/5a1faa089b06a.jpg","../img/manshoseImg/5a1faa08e9bb1.jpg","../img/manshoseImg/5a1faa09404c8.jpg"],
+			        "color" : "乌黑色/361度白"
+			      
+                }
+                
+            ]
+        }
+    ]
+}   

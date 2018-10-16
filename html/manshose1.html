@@ -20,13 +20,52 @@
 		     	<section class="w">
 		     		<div id="smallPic" class="l">
 		     			<ul>
-		     				<li></li>
-		     				<li></li>
-		     				<li></li>
-		     				<li></li>
+		     			
 		     			</ul>
 		     		</div>
 		     		<div id="bigPic" class="l">
+		     			
+		     		</div>
+		     		<div id="right-details" class="l">
+		     			<h2></h2>
+		     			<h3></h3>
+		     			<div class="products-price"><span>原价:<b></b></span>运费不包邮（<a href="#">运费详情</a>）</div>
+		     			<p class="products-color">颜色分类<span>361度白/乌黑色</span></p>
+		     			<ul class="products-color-choice">
+		     				
+		     			</ul>
+		     			<div class="products-size">
+		     				<div class="products-size-top">
+		     					<input type="button" id="button-size" value="尺码选择    -" />
+			     				<span>
+			     					<input type="button" id="less-count" value="-" />
+			     					<input type="text" id="num" value="1" />
+			     					<input type="button" id="add-count" value="+" />
+			     				</span>
+		     				</div>
+		     				<ul class="size-show">
+		     					<li>39</li>
+		     					<li>40</li>
+		     					<li>41</li>
+		     					<li>42</li>
+		     					<li>43</li>
+		     					<li>44</li>
+		     					<li>45</li>
+		     					<li>46</li>
+		     					<li>47</li>
+		     				</ul>
+		     				
+		     			</div>
+		     			<span id="massage">请选择商品尺码</span>
+		     			<div class="products-buy">
+		     				<input type="button" id="addshopcar" value="加入购物车" />
+		     				<input type="button" id="buynow" value="立即购买" />
+		     			</div>
+		     			<ul>
+		     				<li>收藏<span></span></li>
+		     				<li>分享<span></span></li>
+		     			</ul>
+		     			
 		     			
 		     		</div>
 		     	</section>
@@ -45,47 +84,108 @@
 		$("header").load("header.html",function(){
 			addEvent()
 		});
-		//getData ();
+		
 		$("footer").load("footer.html",function(){
 			addEvent()
 		});
+		
+		getData ();
+		showImg();
+		
     });  
    
-    //获取数据
-//  function getData () {
-//  	$.getJSON("../json/allshopList.json",function(data){
-//  		console.log(data);
-//  		createUI(data);
-//  		
-//  	})
-//  }
-//  
+        //获取数据
+    function getData () {
+    	$.getJSON("../json/manshose11.json",function(data){
+    		console.log(data);
+    		createUI(data);
+    		
+    	});
+    }
+    
+    function showImg () {
+    	$("#button-size").toggle(
+    		function () {
+    			$(".size-show").fadeIn(500);
+    		},
+    		function () {
+    			$(".size-show").fadeOut(500);
+    		}
+    	)
+    }
+    
 //  //物品展示
-//  function createUI(data) {
-//      
-//      let goodsList = data.CATALOG;
-//       console.log(goodsList);
-//      for (let i in goodsList) {
-//      	let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
-//      	  $sectionBox.css({
-//								width: "100%",
-//								"height":"auto",
-//						        "margin-bottom":"20px",
-//                              "position":"relative",
-//							});
-//          $("main").append($sectionBox); 
-//      
-////               //创建标题和商品盒子
-////      	    let $h2 = $("<h2></h2>");
-////    	      $h2.css({
-////						    width: "100%",
-////						    height:"66px",						        
-////						    "line-height": "66px",
-////					        "font-size": "26px",
-////					       "font-weight":" normal",
-////					        "padding-left": "20px"
-////					       
-////							});
+  function createUI(data) {
+     
+        let goodsList = data.CATALOG;
+        console.log(goodsList);
+        for (let i in goodsList) {
+            $("#right-details h2").text(goodsList[i].title);
+            $("#right-details h3").text(goodsList[i].price);
+            $("#right-details .products-price span").children("b").text(goodsList[i].currPrice);
+            
+            let lists = goodsList[i].goods;
+            
+            //左边盒子当前显示的图片
+				for (let i in lists[0].imgurl ) {
+					let $liBox = $("<li></li>");
+					$liBox.css({
+						"backgroundImage":"url("+lists[0].imgurl[i]+")",
+						"background-position":"center",
+						"background-size":"100%",
+					});
+					$liBox.hover(
+						function () {
+							let curImg=$(this).css("backgroundImage");
+							$("#bigPic").css({
+								"backgroundImage":curImg,
+								"background-size":"100%"
+							});
+							$(this).css({
+								"box-shadow":"2px 3px 3px #ddd,2px 3px 3px #ddd,0px 10px 10px #ddd,-3px 5px 5px #ddd"
+							    });
+							
+					       },
+						function () {
+							$(this).css({
+								"box-shadow":"none",
+							    });
+							
+					       });
+						
+  				 $("#smallPic ul").append($liBox);
+				}
+				
+            for (let i in lists) {
+            	
+            	let $li = $("<li></li>");
+            	let imgurls = lists[i].imgurl;
+            	  $li.css({
+							"backgroundImage":"url("+imgurls[0]+")",
+							"background-size":"cover"
+						       
+							});
+					$li.click(
+						function () {
+							$(this).css({
+								"border":"1px solid #f70",
+								"border-radius":"50%"
+							});
+							$(this).siblings().css({
+								"border":"0",
+								"border-radius":"0"
+							});	
+					   }
+					);
+			
+				 $("#right-details .products-color-choice").append($li);
+				
+				
+            }
+            
+        }
+   }
+
 ////      	    $h2.text(goodsList[i].h2);
 //      	    
 //      	    let $shopBox = $("<div></div>");
