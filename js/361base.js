@@ -69,6 +69,13 @@ function addEvent(){
 		 	}
 		 
 		});
+		//点击toTop,到达顶部
+		$("#toTop").click(function(){
+			$("html,body").animate({
+				"scroll-top":"0px"
+			},500);
+			
+		});
 		
 		 //鼠标移到微信图标上二维码显示
 		$("footer .foot_nav .wechat").mouseenter(function(){
@@ -78,11 +85,5 @@ function addEvent(){
 			$("#erweima").hide("slow");
 		});
 		
-		//点击toTop,到达顶部
-		$("#toTop").click(function(){
-			$(window).animate({
-				scrollTop:0
-			},500);
-			
-		})
+		
 }

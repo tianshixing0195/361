@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+//全局变量
+$Width:350px;
+$Height:350px;
+$bgColor:white;
+$color:black;
+$bordeRadius:50%;
+$pHeight:30px;
+$font-size:16px;
+$bordeRadius:5px;
+$border:1px solid #bbb;
+$marginWidth:20px ;
+$marginHeight:20px;
+
+#list{
+    width: 100%;
+    
+    margin-top: 50px;
+    margin-bottom: 40px;
+    .top{
+        height: 26px;
+       // background: red;
+        margin-bottom:$marginWidth;
+        li{  height:26px;
+             line-height:26px;
+             color: black;
+             //background: #55A532;
+             font-size: 12px;
+             a{
+                 color: #bbb;
+             }
+        }
+        li:first-of-type{
+            color: #bbb;
+        } 
+    } 
+}
+
+section{
+    width: 100%;
+    height:488px;
+    border:$border;
+    margin-top: 30px;
+ 
+}
+   
+  #smallPic{
+       width: 110px;
+       height: 488px;
+       background: burlywood;
+       
+       ul{
+           width: 100%;
+           height: auto;
+           
+           li{
+               width: 108px;
+               height: 108px;
+               border: $border;
+               background:greenyellow ;
+               margin-bottom: 12px;
+           }
+       }
+        
+    }
+ #bigPic{
+     width: 488px;
+     height: 488px;
+     border: $border;
+     margin-left: 15px;
+ }
