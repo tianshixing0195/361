@@ -30,7 +30,7 @@
 		     			<h2></h2>
 		     			<h3></h3>
 		     			<div class="products-price"><span>原价:<b></b></span>运费不包邮（<a href="#">运费详情</a>）</div>
-		     			<p class="products-color">颜色分类<span>361度白/乌黑色</span></p>
+		     			<p class="products-color">颜色分类<span></span></p>
 		     			<ul class="products-color-choice">
 		     				
 		     			</ul>
@@ -76,6 +76,7 @@
 </html>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
+<script type="text/javascript" src="../js/BigMirror.js" ></script>
 <script type="text/javascript">
 	
    $(function(){
@@ -87,77 +88,56 @@
 		
 		$("footer").load("footer.html",function(){
 			addEvent()
-		});
+		});		
 		
 		getData ();
-		showImg();
-		
+		joinCar();
+		 
     });  
    
         //获取数据
     function getData () {
     	$.getJSON("../json/manshose11.json",function(data){
     		console.log(data);
-    		createUI(data);
+    		initUI(data);
+    		updateUI(data);
+    		addAnimate();
     		
     	});
     }
     
-    function showImg () {
-    	$("#button-size").toggle(
-    		function () {
-    			$(".size-show").fadeIn(500);
-    		},
-    		function () {
-    			$(".size-show").fadeOut(500);
-    		}
-    	)
-    }
-    
-//  //物品展示
-  function createUI(data) {
-     
-        let goodsList = data.CATALOG;
+    //页面打开时初始化数据
+    function initUI (data) {
+    	let goodsList = data.CATALOG;
         console.log(goodsList);
         for (let i in goodsList) {
-            $("#right-details h2").text(goodsList[i].title);
-            $("#right-details h3").text(goodsList[i].price);
-            $("#right-details .products-price span").children("b").text(goodsList[i].currPrice);
+            $("#right-details h2").text(goodsList[0].title);  //鞋名
+            $("#right-details h3").text(goodsList[0].price);  //价格
+            $("#right-details .products-price span").children("b").text(goodsList[0].currPrice);  //原价
+					
+            let lists = goodsList[0].goods;
             
-            let lists = goodsList[i].goods;
+            $("#right-details .products-color ").children("span").text(lists[0].color);  //颜色
+             
+            for (let i in lists[0].imgurl ) {
+				let $liBox = $("<li></li>");				
+				$liBox.css({
+					"background-image":"url("+lists[0].imgurl[i]+")",
+					"background-position":"center",
+					"background-size":"100%",
+				});
+			     $("#smallPic ul").append($liBox);
+			     
+			    //中间大盒子的图片
+                $("#bigPic").css({
+					"backgroundImage":"url("+lists[0].imgurl[0]+")",
+					"background-size":"cover"
+						       
+				});			    
+		   }
             
-            //左边盒子当前显示的图片
-				for (let i in lists[0].imgurl ) {
-					let $liBox = $("<li></li>");
-					$liBox.css({
-						"backgroundImage":"url("+lists[0].imgurl[i]+")",
-						"background-position":"center",
-						"background-size":"100%",
-					});
-					$liBox.hover(
-						function () {
-							let curImg=$(this).css("backgroundImage");
-							$("#bigPic").css({
-								"backgroundImage":curImg,
-								"background-size":"100%"
-							});
-							$(this).css({
-								"box-shadow":"2px 3px 3px #ddd,2px 3px 3px #ddd,0px 10px 10px #ddd,-3px 5px 5px #ddd"
-							    });
-							
-					       },
-						function () {
-							$(this).css({
-								"box-shadow":"none",
-							    });
-							
-					       });
-						
-  				 $("#smallPic ul").append($liBox);
-				}
-				
-            for (let i in lists) {
-            	
+            //尺寸展示盒子的图片
+            for (let i in lists) {            	
             	let $li = $("<li></li>");
             	let imgurls = lists[i].imgurl;
             	  $li.css({
@@ -165,187 +145,129 @@
 							"background-size":"cover"
 						       
 							});
-					$li.click(
-						function () {
-							$(this).css({
-								"border":"1px solid #f70",
-								"border-radius":"50%"
-							});
-							$(this).siblings().css({
-								"border":"0",
-								"border-radius":"0"
-							});	
-					   }
-					);
-			
+				            
 				 $("#right-details .products-color-choice").append($li);
 				
-				
-            }
-            
+            }    
         }
-   }
+    }
+    //update 鼠标移上或点击时外观更新
+  //物品展示
+  function updateUI(data) {
+            
+        let goodsList = data.CATALOG;
+          //console.log(goodsList);
+        for (let i in goodsList) {								
+            let lists = goodsList[i].goods;
 
-////      	    $h2.text(goodsList[i].h2);
-//      	    
-//      	    let $shopBox = $("<div></div>");
-//      	     $shopBox.css({
-//								width: "100%",
-//						        height:"auto"
-//						       
-//						      
-//							});
-//      	    //$sectionBox.append($h2);
-//      	    $sectionBox.append($shopBox);     
-//       
-//      	    let lists = goodsList[i].goods;
-//      	    for (let i in lists ) {
-//      	    	
-//      	    	//单个商品显示的盒子
-//  	            let $oneShopBigBox = $("<div></div>");
-//  	                 $oneShopBigBox.css({
-//  	                 	    "display":"inline-block",
-//  	                 	    "box-sizing":"border-box",
-//								"width": "350px",
-//								"height":"440px",
-//								"position":"relative",
-//								"background":"white",
-//								  "z-index":0,
-//						        "cursor": "pointer",
-//						       // "border":"1px solid #e0e0e0",
-//						        "margin-bottom":"20px",
-//						        "border-radius":"5px",
-//						        "margin-left":"10px",
-//						        "margin-right":"30px"
-//							});
-//					  $shopBox.append($oneShopBigBox);		
-//  	            let $oneShopBox = $("<div></div>");
-//  	                 $oneShopBox.css({
-//  	                 	   
-//								"width": "350px",
-//								//"height":"460px",
-//								"background":"white",
-//								"position":"absolute",
-//								 "box-sizing":"border-box",
-//								"top":0,
-//								"left":0,
-//			                    "z-index":0,
-//						        "border":"1px solid #eee",
-//						       
-//						        "border-radius":"5px",
-//						        
-//							});
-//      	    	    $oneShopBigBox.append($oneShopBox);
-//      	    	    
-//      	    		
-//      	    		//创建商品显示的盒子
-//      	    		let $imgBox = $("<div></div>");
-//      	    		let imgurls = lists[i].imgurl;
-//      	    		 
-//      	    		   $imgBox.css({
-//      	    		   	    width: "100%",
-//                              height: "350px",
-//								"backgroundImage":"url("+imgurls[0]+")",
-//								"background-size":"cover"		    
-//							});
-//						 $oneShopBox.append($imgBox);	
-//					    //下方小图片的盒子
-//						//ul
-//						let $ulBox = $("<ul></ul>");
-//						   $ulBox.css({
-//      	    		   	    width: "100%",
-//                              height: "50px",
-//								"display":"none"		    
-//							});
-//						    $oneShopBox.append($ulBox);	
-//						    
-//						    //动画效果
-//						    
-//						$oneShopBigBox.hover(
-//						function () {
-//							$(this).css({
-//								"z-index":1,
-//							});
-//							$(this).children("div").css({
-//								"z-index":2,
-//								"position":"absolute",
-//								"box-shadow":"6px 10px 10px #ddd,6px 10px 10px #ddd,0px 20px 20px #ddd,-6px 10px 10px #ddd"
-//							})
-//							$(this).children("div").animate({
-//								width:"355px",
-//								"height":"auto",
-//								"top":"-5px",
-//								"left":0,
-//							},600);
-//							 $(this).children("div").children("ul").slideToggle(100);
-//					   },
-//					   function () {
-//					   	    $(this).css({
-//								"z-index":0,
-//							});
-//							$(this).children("div").css({
-//								"box-shadow":"none",
-//							})
-//					   	    $(this).children("div").animate({
-//								"top":"0px",
-//								"left":0,
-//								"z-index":0
-//							},600);
-//						   	$(this).children("div").children("ul").slideToggle(100);
-//					   }
-//					);
-//						
-//										
-//						//li
-//						for(let i=0;i<imgurls.length;i++){
-//						    let $liBox = $("<li></li>");
-//								$liBox.css({
-//									width: "60px",
-//						            height: "50px",
-//						            margin:"0 10px",
-//						            "background-size": "100%", 
-//									float:"left",
-//									"backgroundImage":"url("+imgurls[i]+")",
-//									"background-position":"center"
-//								});
-//								$ulBox.append($liBox);
-//							   	$liBox.mouseenter(function(){
-//									let curImg=$(this).css("backgroundImage");
-//									$(this).parent().prev().css("backgroundImage",curImg)
-//								});
-//						}
-//						
-//		            //文字的盒子
-//						let $titleBox = $("<h3></h3>");
-//				            $titleBox.css({
-//								width: "100%",
-//					            "text-align":"center" ,
-//					           "font-size": "16px",
-//					            "font-weight": "normal",
-//					            "margin-top": "14px"
-//				           
-//						    });
-//							$titleBox.text(lists[i].title);
-//							$oneShopBox.append($titleBox);
-//						
-//						//价格的盒子
-//						let $priceBox = $("<p></p>");
-//				        $priceBox.css({
-//							width: "100%",
-//							height:"40px",
-//				            "text-align":"center" ,
-//				            "font-size": "14px",
-//				            "color": "#f60",
-//				            "padding-top": "14px"
-//				           
-//						});
-//						$priceBox.text(lists[i].price);
-//						$oneShopBox.append($priceBox);
-//      	    	}
-//      	 	
-//      	}   
-//      	
-//     
-//  }
-//  
+             $("#right-details .products-color-choice").children("li").click(function () {
+            	let index = 0;
+                let lidom =  $(this).parent().children();
+                
+                for (i=0;i<lidom.length;i++) {
+                	if ($(lidom[i]).is($(this))) {
+                		index = i;
+                		console.log(index);
+                		let imgurls = lists[index].imgurl;
+                		$("#bigPic").css({
+                			
+							"backgroundImage":"url("+imgurls[0]+")",
+							"background-size":"cover"
+								       
+						});	
+                		
+                		$("#right-details .products-color").children("span").text(lists[index].color);  //颜色
+                		//console.log(lists[index].color);
+                		
+                		let showLi = $("#smallPic").children("ul").children("li");
+                		$(showLi).each(function (i) {
+                			$(this).css({
+										"background-image":"url("+imgurls[i]+")",
+										"background-position":"center",
+										"background-size":"100%",
+							    }); 
+                		})
+                	}
+                 
+                }
+            	
+            		$(this).css({
+							"border":"1px solid #f70",
+							"border-radius":"50%"
+						});
+						$(this).siblings().css({
+							"border":"0",
+							"border-radius":"0"
+						});	
+            });
+
+     }  
+   }
+   
+    function addAnimate() {
+    	$("#button-size").toggle(
+    		function () {
+    			$(".size-show").fadeIn(500);
+    		},
+    		function () {
+    			$(".size-show").fadeOut(500);
+    		}
+    	);
+    	
+	    //鼠标移上添加阴影效果	    
+	    $("#smallPic").children("ul").children("li").hover(
+			function () {
+				 curImg=$(this).css("backgroundImage");
+				
+				//当前中间大盒子显示的图片
+				$("#bigPic").css({
+					"backgroundImage":curImg,
+					"background-size":"100%"
+				});
+				$(this).css({
+					"position":"relative",
+					"box-shadow":"2px 3px 3px #ddd,2px 3px 3px #ddd,0px 10px 10px #ddd,-3px 5px 5px #ddd",
+					"top":"-2px"
+				   });
+                
+                $("#bigPic").mouseenter(function(){
+					singlton.getInstance({
+						//要放大的图片对应的dom元素
+						bigBoxDom:this,
+						//大图的src；要放大的效果的dom元素的背景图片
+						bigImg:curImg,			
+						//要放大图片的宽和高
+						bigBoxWidth:488,
+						bigBoxHeight:488,
+						//放大镜的宽和高
+						width:200,
+						height:200
+					});
+		        });		     
+		    },
+			function () {
+				$(this).css({
+					"box-shadow":"none",
+					"top":"0px"
+				   });
+		    });
+    	
+}		
+ 
+ function joinCar() {
+ 	   let count = 1;
+ 	   $("#less-count").click(function () {
+ 	   	    count--;
+ 	   	    if (count<=1) {
+ 	   	    	count =1;
+ 	   	    }
+ 	   	    $("#num").val(count);
+ 	   });
+ 	  $("#add-count").click(function () {
+ 	   	    count++;
+ 	   	     $("#num").val(count);
+ 	   }); 
+ 	   $("#num").val(count);
+ }
+ 
 </script>

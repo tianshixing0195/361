@@ -49,7 +49,7 @@ section{
   #smallPic{
        width: 110px;
        height: 488px;
-       background: burlywood;
+       //background: burlywood;
        
        ul{
            width: 100%;
@@ -59,17 +59,20 @@ section{
                width: 108px;
                height: 108px;
                border: $border;
-               background:greenyellow ;
+               //background:greenyellow ;
                margin-bottom: 12px;
            }
        }
         
     }
  #bigPic{
+     position: relative;
      width: 488px;
      height: 488px;
      border: $border;
      margin-left: 15px;
+//   background:url(../img/manshoseImg/5a1faa0483d2c.jpg);
+//   background-size:100%;
  }
 #right-details{
     width: 540px;
