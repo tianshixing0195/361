@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品列表</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/shopList.css"/>
+	</head>
+	<body>
+		<header></header>
+	     <main>
+	     	<div id="list">
+	     		<ul class="w top">
+	     			<li class="l">所有分类></li>
+	     			<li class="l">所有商品</li>
+	     			<li class="r">搜索到<span id="count">1110</span>件商品</li>
+	     		</ul>
+	     	</div>
+     		<div id="main">
+     			<div class="w">
+     				<ul>
+     					<span class="l">产品分类</span>
+     					<li class="l"><a href="manshose1.html">鞋</a></li>
+     					<li class="l"><a href="#">上装</a></li>
+     					<li class="l"><a href="#">下装</a></li>
+     					<li class="l"><a href="#">泳镜</a></li>
+     					<li class="l"><a href="#">泳帽</a></li>
+     					<li class="l"><a href="#">泳衣</a></li>
+     					<li class="l"><a href="#">配件</a></li>
+     					<li class="l"><a href="#">新品上市</a></li>
+     				</ul>
+     				<ul>
+     					<span class="l">性别</span>
+     					<li class="l"><a href="#">女</a></li>
+     					<li class="l"><a href="#">男</a></li>
+     					<li class="l"><a href="#">女童</a></li>
+     					<li class="l"><a href="#">男童</a></li>
+     					<li class="l"><a href="#">男女同款</a></li>
+     	
+     				</ul>
+     				<ul>
+     					<span class="l">科技</span>
+     					<li class="l"><a href="#">NFO磁悬浮</a></li>
+     					<li class="l"><a href="#">BOUNDAIR°</a></li>
+     					<li class="l"><a href="#">气悬浮科技</a></li>
+     					<li class="l"><a href="#">超强避震</a></li>
+     					<li class="l"><a href="#">特种橡胶花纹</a></li>
+     					<li class="l"><a href="#">双悬浮科技</a></li>
+     					<li class="l"><a href="#">FLEXI易窝</a></li>
+     					<li class="l"><a href="#">SPONGEE</a></li>
+     					<span class="l"><a href="#">更多+</a></span>
+     				</ul>
+     				<ul>
+     					<span class="l">功能</span>
+     					<li class="l"><a href="#">海外</a></li>
+     					<li class="l"><a href="#">时尚休闲</a></li>
+     					<li class="l"><a href="#">篮球</a></li>
+     					<li class="l"><a href="#">跑步</a></li>
+     					<li class="l"><a href="#">足球</a></li>
+     					<li class="l"><a href="#">小球类</a></li>
+     					<li class="l"><a href="#">户外</a></li>
+     					<li class="l"><a href="#">综训</a></li>
+     				</ul>
+     			</div>
+     		</div>
+     		<div class="w sort">
+     			<ul>
+     				<span class="l">排序方式</span>
+     				<li class="l"><a href="">综合排序</a></li>
+     				<li class="l"><a href="">销量</a></li>
+     				<li class="l"><a href="">价格</a></li>
+     			</ul>
+     		</div>
+	     
+		</main> 
+		
+		<footer style="margin-top: 50px;"></footer>
+	</body>
+</html>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+<script type="text/javascript" src="../js/361base.js" ></script>
+<script type="text/javascript">
+	
+   $(function(){
+		
+		//添加header和footer的html文件并引用Js.
+		$("header").load("header.html",function(){
+			addEvent()
+		});
+		
+		$("footer").load("footer.html",function(){
+			addEvent()
+		});
+		
+		getData ();
+    }); 
+    //获取所有的商品列表
+    
+    //给每个商品添加一个事件
+function goGoodsDetail(obj){
+	let goodsid = obj.getAttribute("goodsid");
+	saveCookie("goodsid",goodsid);
+	window.open("goodsdetail.html");
+	
+}
+    //获取数据
+    function getData () {
+    	$.ajax({
+    		type:"get",
+			url:"../php/getGoodsList.php",
+			async:true,
+			success:function(data){
+				console.log(data);
+				createUI(data);
+			},
+			dataType:"json"
+    	})
+    }
+    
+    //物品展示
+    function createUI(data) {
+        
+        let goodsList = data.CATALOG;
+         console.log(goodsList);
+        for (let i in goodsList) {
+        	let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
+        	  $sectionBox.css({
+								width: "100%",
+								"height":"auto",
+						        "margin-bottom":"20px",
+                                "position":"relative",
+							});
+            $("main").append($sectionBox); 
+        
+//               //创建标题和商品盒子
+//      	    let $h2 = $("<h2></h2>");
+//    	      $h2.css({
+//						    width: "100%",
+//						    height:"66px",						        
+//						    "line-height": "66px",
+//					        "font-size": "26px",
+//					       "font-weight":" normal",
+//					        "padding-left": "20px"
+//					       
+//							});
+//      	    $h2.text(goodsList[i].h2);
+        	    
+        	    let $shopBox = $("<div></div>");
+        	     $shopBox.css({
+								width: "100%",
+						        height:"auto"
+						       
+						      
+							});
+        	    //$sectionBox.append($h2);
+        	    $sectionBox.append($shopBox);     
+         
+        	    let lists = goodsList[i].goods;
+        	    for (let i in lists ) {
+        	    	
+        	    	//单个商品显示的盒子
+    	            let $oneShopBigBox = $("<div></div>");
+    	                 $oneShopBigBox.css({
+    	                 	    "display":"inline-block",
+    	                 	    "box-sizing":"border-box",
+								"width": "350px",
+								"height":"440px",
+								"position":"relative",
+								"background":"white",
+								  "z-index":0,
+						        "cursor": "pointer",
+						       // "border":"1px solid #e0e0e0",
+						        "margin-bottom":"20px",
+						        "border-radius":"5px",
+						        "margin-left":"10px",
+						        "margin-right":"30px"
+							});
+					  $shopBox.append($oneShopBigBox);		
+    	            let $oneShopBox = $("<div></div>");
+    	                 $oneShopBox.css({
+    	                 	   
+								"width": "350px",
+								//"height":"460px",
+								"background":"white",
+								"position":"absolute",
+								 "box-sizing":"border-box",
+								"top":0,
+								"left":0,
+			                    "z-index":0,
+						        "border":"1px solid #eee",
+						       
+						        "border-radius":"5px",
+						        
+							});
+        	    	    $oneShopBigBox.append($oneShopBox);
+        	    	    
+        	    		
+        	    		//创建商品显示的盒子
+        	    		let $imgBox = $("<div></div>");
+        	    		let imgurls = lists[i].imgurl;
+        	    		 
+        	    		   $imgBox.css({
+        	    		   	    width: "100%",
+                                height: "350px",
+								"backgroundImage":"url("+imgurls[0]+")",
+								"background-size":"cover"		    
+							});
+						 $oneShopBox.append($imgBox);	
+					    //下方小图片的盒子
+						//ul
+						let $ulBox = $("<ul></ul>");
+						   $ulBox.css({
+        	    		   	    width: "100%",
+                                height: "50px",
+								"display":"none"		    
+							});
+						    $oneShopBox.append($ulBox);	
+						    
+						    //动画效果
+						    
+						$oneShopBigBox.hover(
+						function () {
+							$(this).css({
+								"z-index":1,
+							});
+							$(this).children("div").css({
+								"z-index":2,
+								"position":"absolute",
+								"box-shadow":"6px 10px 10px #ddd,6px 10px 10px #ddd,0px 20px 20px #ddd,-6px 10px 10px #ddd"
+							})
+							$(this).children("div").animate({
+								width:"355px",
+								"height":"auto",
+								"top":"-5px",
+								"left":0,
+							},600);
+							 $(this).children("div").children("ul").slideToggle(100);
+					   },
+					   function () {
+					   	    $(this).css({
+								"z-index":0,
+							});
+							$(this).children("div").css({
+								"box-shadow":"none",
+							})
+					   	    $(this).children("div").animate({
+								"top":"0px",
+								"left":0,
+								"z-index":0
+							},600);
+						   	$(this).children("div").children("ul").slideToggle(100);
+					   }
+					);
+						
+										
+						//li
+						for(let i=0;i<imgurls.length;i++){
+						    let $liBox = $("<li></li>");
+								$liBox.css({
+									width: "60px",
+						            height: "50px",
+						            margin:"0 10px",
+						            "background-size": "100%", 
+									float:"left",
+									"backgroundImage":"url("+imgurls[i]+")",
+									"background-position":"center"
+								});
+								$ulBox.append($liBox);
+							   	$liBox.mouseenter(function(){
+									let curImg=$(this).css("backgroundImage");
+									$(this).parent().prev().css("backgroundImage",curImg)
+								});
+						}
+						
+		            //文字的盒子
+						let $titleBox = $("<h3></h3>");
+				            $titleBox.css({
+								width: "100%",
+					            "text-align":"center" ,
+					           "font-size": "16px",
+					            "font-weight": "normal",
+					            "margin-top": "14px"
+				           
+						    });
+							$titleBox.text(lists[i].title);
+							$oneShopBox.append($titleBox);
+						
+						//价格的盒子
+						let $priceBox = $("<p></p>");
+				        $priceBox.css({
+							width: "100%",
+							height:"40px",
+				            "text-align":"center" ,
+				            "font-size": "14px",
+				            "color": "#f60",
+				            "padding-top": "14px"
+				           
+						});
+						$priceBox.text(lists[i].price);
+						$oneShopBox.append($priceBox);
+        	    	}
+        	 	
+        	}   
+        	
+       
+    }
+    
+</script>

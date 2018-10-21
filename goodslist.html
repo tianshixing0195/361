@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<img goodsid='' src="" onclick="goGoodsDetail(this)" />
+			</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+</html>
+<script type="text/javascript">
+
+function goGoodsDetail(obj){
+	let goodsid = obj.getAttribute("goodsid");
+	saveCookie("goodsid",goodsid);
+	window.open("goodsdetail.html");
+	
+}
+
+function showList(list){
+	for(let i in list){
+		
+	}
+}
+
+$.get(,function(){
+	showList()
+});
+	
+</script>

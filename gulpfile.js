@@ -31,6 +31,10 @@ gulp.task('copy-js',function(){
 	.pipe(gulp.dest(basepath+"\\js"));
 });
 
+gulp.task('copy-php',function(){
+	gulp.src("php/**/*")
+	.pipe(gulp.dest(basepath+"\\php"));
+});
 
 gulp.task('copy-json',function(){
 	gulp.src("json/*.json")
@@ -46,7 +50,7 @@ gulp.task("sass",function(){
 
 
 //多个任务一起执行
-gulp.task("build",["copy-html1","copy-html2","copy-img","copy-js","copy-json","copy-css","sass"],function(){
+gulp.task("build",["copy-html1","copy-html2","copy-img","copy-js","copy-json","copy-css","sass","copy-php"],function(){
 	console.log("ok");
 });
 
@@ -60,6 +64,8 @@ gulp.task("watchall",function(){
 	gulp.watch("js/*.js",["copy-js"]);
 	gulp.watch("json/*.json",["copy-json"]);
 	gulp.watch("css/*.css",["copy-css"]);
+	gulp.watch("php/**/*",["copy-php"]);
 	gulp.watch("sass/*.scss",["sass"]);
+	
 	
 });

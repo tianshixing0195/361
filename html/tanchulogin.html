@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>会员登录</title>
+		<!--<link rel="stylesheet" type="text/css" href="../css/base.css"/>-->
+		<link rel="stylesheet" type="text/css" href="../css/tanchulogin.css"/>
+	</head>
+	<body>
+	
+		<main>
+			<p><img src="../img/close.png" id="close"/></p>
+			<div id="login">
+				
+				<h1><img src="../img/logo.png"/></h1>
+				<form>
+					<input type="text" name="username" id="userid" value="" placeholder="请输入账号或手机号码" />
+					<input type="password" name="userpass" id="userpass" value="" placeholder="请输入密码" />
+					<input type="checkbox"  id="choose" value="" /><a href="">(记住我)两周内免登录</a>	
+					<input type="button" id="loginBtn" value="立即登录"/>
+					<span id="tipspan"></span>
+				</form>
+				<ul class="user">
+					<li><a href="#">忘记密码</a></li>
+					<li><a href="reg.html">注册361°账号</a></li>
+				</ul>
+			</div>
+		</main>
+	
+	</body>
+</html>
+
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+<script type="text/javascript" src="../js/getStyle.js" ></script>
+<script type="text/javascript" src="../js/361base.js" ></script>
+<script type="text/javascript" src="../js/cookieTools.js" ></script>
+<script type="text/javascript">
+	
+	$(function(){
+		
+		//1.两周内免登录
+		$("#loginBtn").on('click',function () {
+			//保存cookie
+			var d= new Date();
+			d.setDate(d.getDate()+14);
+			document.cookie = "yhm="+$("#userid").value+"; expires="+d.toGMTString();
+			//
+		
+			//location.href = "../index.html";
+			//window.location.href="http://localhost/myProject/361/index.html";
+			
+			
+		});
+		$("#close").hover(
+			function () {
+				 $(this).css({
+				 	"background":"#ccc"
+				 });
+		    },
+		    function(){
+		    	$(this).css({
+				 	"background":"white";
+				 });
+		    }
+		    
+		)
+		
+	})
+	function sendData () {
+		let data = $("form").serialize();
+		$.post("loginCheck.php",data,function (str) {
+			if (str=="0") {
+				
+			}else if (str=="1") {
+				alert("注册成功");
+				location.href = "../index.html";
+			}else{
+				alert("服务器出错，注册失败");
+			}
+			
+		});
+	}
+</script>

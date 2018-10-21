@@ -52,17 +52,39 @@
 		$("footer").load("footer.html",function(){
 			addEvent()
 		});
-        //点击按钮进行验证和发送请求
+		
+		
+		//发送请求和用户名验证
+		   sendData ();
+        //点击按钮进行验证和
 		 $("#loginBtn").click(function(){
-            checkAll ();
-            sendData ();
-
+            checkAll (); 
+            
+            
+            //添加用户名
+            $.post(
+				"../php/addUser.php",
+				{
+					"userId":$("#username").val(),
+					"userPass":$("#userpass").val(),
+					"userPhone":$("#phoneNum").val()
+				},
+				function(data){					
+					if (data=="1") {
+					  //location.href = "../index.html";
+					}
+				}
+			);
+            
            }) ;
            
+           
+           //更换验证图片
            let arr = getImg();
           $("form .changeImg").click(function(){
           	 let index=parseInt(Math.random()*34);
-            $("#imgshow").src =arr[index];
+           // $("#imgshow").src =arr[index];
+           $("#imgshow").attr("src",arr[index]);
              //src="../img/verify (1).jpg"
           });
            
@@ -197,21 +219,25 @@
            	
 	}
 	function sendData () {
-		let data = $("form").serialize();
-		$.post("regSave.php",data,function (str) {
-			if (str=="-1") {
-				 $("#userspan").css({
-           	 	     "display":"block"	
-           	 	 });
-                 $("#userspan").text("*此昵称已经有人使用，请重新输入");
-			}else if (str=="1") {
-				alert("注册成功");
-				location.href = "../index.html";
-			}else{
-				alert("服务器出错，注册失败");
-			}
+		//验证用户名是否存在
+		$("#username").blur(function(){
+			$.get(
+				"../php/checkUser.php",
+				{
+					"userId":$("#username").val()	
+				},
+				function(data){
+					if(data=="1"){
+						 $("#userspan").html("*此昵称可用");;						
+					}else{
+						 $("#userspan").html("*昵称已经被注册");;
+					}
+				}				
+			);
 			
 		});
+		
+		
 	}
     
     function getImg () {

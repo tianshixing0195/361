@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>男常规跑鞋</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/manshose1.css"/>
+	</head>
+	<body>
+		<header></header>
+	     <main>
+		        <div id="list">
+		     		<ul class="w top">
+		     			<li class="l">所有分类></li>
+		     			<li class="l"><a href="../index.html">首页></a></li>
+		     			<li class="l"><a href="shopList.html"/>商品列表></a></li>
+		     			<li class="l">男常规跑鞋</li>
+		     		</ul>
+		     	</div>
+		     	<section class="w">
+		     		<div id="smallPic" class="l">
+		     			<ul>
+		     			
+		     			</ul>
+		     		</div>
+		     		<div id="bigPic" class="l">
+		     			
+		     		</div>
+		     		<div id="right-details" class="l">
+		     			<h2><span id="goodsId"></span></h2>
+		     			<h3></h3>
+		     			<div class="products-price"><span>原价:<b></b></span>运费不包邮（<a href="#">运费详情</a>）</div>
+		     			<p class="products-color">颜色分类<span></span></p>
+		     			<ul class="products-color-choice">
+		     				
+		     			</ul>
+		     			<div class="products-size">
+		     				<div class="products-size-top">
+		     					<input type="button" id="button-size" value="尺码选择    -" />
+			     				<span>
+			     					<input type="button" id="less-count" value="-" />
+			     					<input type="text" id="num" value="1" />
+			     					<input type="button" id="add-count" value="+" />
+			     				</span>
+		     				</div>
+		     				<ul class="size-show">
+		     					<li>39</li>
+		     					<li>40</li>
+		     					<li>41</li>
+		     					<li>42</li>
+		     					<li>43</li>
+		     					<li>44</li>
+		     					<li>45</li>
+		     					<li>46</li>
+		     					<li>47</li>
+		     				</ul>
+		     				
+		     			</div>
+		     			<span id="massage">请选择商品尺码</span>
+		     			<div class="products-buy">
+		     				<input type="button" id="addshopcar" value="加入购物车" />
+		     				<input type="button" id="buynow" value="立即购买" />
+		     			</div>
+		     			<ul>
+		     				<li>收藏<span id="collect"></span></li>
+		     				<li>分享<span id="share"></span></li>
+		     			</ul>
+		     			
+		     			
+		     		</div>
+		     	</section>
+		     	<section id="shop-details">
+		     		<ul class="top-nav">
+		     			<li>商品详情</li>
+		     			<li>商品评论</li>
+		     			<li>尺码说明</li>
+		     		</ul>
+		     	</section>
+		</main> 
+		
+		<footer style="margin-top: 50px;"></footer>
+	</body>
+</html>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+<script type="text/javascript" src="../js/361base.js" ></script>
+<script type="text/javascript" src="../js/BigMirror.js" ></script>
+<script type="text/javascript" src="../js/tanchukuang.js" ></script>
+<script type="text/javascript">
+	
+   $(function(){
+		
+		//添加header和footer的html文件并引用Js.
+		$("header").load("header.html",function(){
+			addEvent()
+		});
+		
+		$("footer").load("footer.html",function(){
+			addEvent()
+		});		
+		
+		getData ();
+		joinCar();
+		//tanchukuang ();
+		
+		//点击加入购物车
+		$("#addshopcar").click(function () {
+			
+			addShoppingCart ();
+		});
+		
+    });  
+   
+        //获取数据
+    function getData () {
+    	
+		    //1、从cookie中读取商品编号goodsid
+			let goodsid = getCookie("goodsid");
+			
+			//2、发送ajax请求，获取商品信息
+			$.ajax({
+				type:"get",
+				url:"getGoodsInfo.php",
+				async:true,
+				data:{
+					"goodsId":goodsid
+				},
+				success:function(data){
+					console.log(data);
+		    		initUI(data);
+		    		updateUI(data);
+		    		addAnimate();
+				},
+				dataType:"json"
+			});	
+		    	
+    }
+    //向购物车添加物品
+    function addShoppingCart () {
+    	
+    	 //1、从cookie中读取商品编号goodsid
+			let goodsid = getCookie("goodsid");
+			let userName = getCookie("userId");
+    	
+    	 $.ajax({
+				type:"get",
+				url:"../php/addShoppingCart.php",
+				async:true,
+				data:{
+					"goodsId":goodsid,
+					"vipName":userName,
+					"goodsCount":$("#num").val();
+				},
+				success:function(data){
+					console.log(data);
+		    		
+				},
+				dataType:"json"
+			});	
+    	
+    }
+    
+    
+    //页面打开时初始化数据
+    function initUI (data) {
+    	let goodsList = data.CATALOG;
+        console.log(goodsList);
+        for (let i in goodsList) {
+            $("#right-details h2").text(goodsList[0].title);  //鞋名
+            $("#right-details h3").text(goodsList[0].price);  //价格
+            $("#right-details .products-price span").children("b").text(goodsList[0].currPrice);  //原价
+					
+            let lists = goodsList[0].goods;
+            
+            $("#right-details .products-color ").children("span").text(lists[0].color);  //颜色
+             
+            for (let i in lists[0].imgurl ) {
+				let $liBox = $("<li></li>");				
+				$liBox.css({
+					"background-image":"url("+lists[0].imgurl[i]+")",
+					"background-position":"center",
+					"background-size":"100%",
+				});
+			     $("#smallPic ul").append($liBox);
+			     
+			    //中间大盒子的图片
+                $("#bigPic").css({
+					"backgroundImage":"url("+lists[0].imgurl[0]+")",
+					"background-size":"cover"
+						       
+				});			    
+		   }
+            
+            //尺寸展示盒子的图片
+            for (let i in lists) {            	
+            	let $li = $("<li></li>");
+            	let imgurls = lists[i].imgurl;
+            	  $li.css({
+							"backgroundImage":"url("+imgurls[0]+")",
+							"background-size":"cover"
+						       
+							});
+				            
+				 $("#right-details .products-color-choice").append($li);
+				
+            }    
+        }
+    }
+    //update 鼠标移上或点击时外观更新
+  //物品展示
+  function updateUI(data) {
+            
+        let goodsList = data.CATALOG;
+          //console.log(goodsList);
+        for (let i in goodsList) {								
+            let lists = goodsList[i].goods;
+
+             $("#right-details .products-color-choice").children("li").click(function () {
+            	let index = 0;
+                let lidom =  $(this).parent().children();
+                
+                for (i=0;i<lidom.length;i++) {
+                	if ($(lidom[i]).is($(this))) {
+                		index = i;
+                		console.log(index);
+                		let imgurls = lists[index].imgurl;
+                		$("#bigPic").css({
+                			
+							"backgroundImage":"url("+imgurls[0]+")",
+							"background-size":"cover"
+								       
+						});	
+                		
+                		$("#right-details .products-color").children("span").text(lists[index].color);  //颜色
+                		//console.log(lists[index].color);
+                		
+                		let showLi = $("#smallPic").children("ul").children("li");
+                		$(showLi).each(function (i) {
+                			$(this).css({
+										"background-image":"url("+imgurls[i]+")",
+										"background-position":"center",
+										"background-size":"100%",
+							    }); 
+                		})
+                	}
+                 
+                }
+            	
+            		$(this).css({
+							"border":"1px solid #f70",
+							"border-radius":"50%"
+						});
+						$(this).siblings().css({
+							"border":"0",
+							"border-radius":"0"
+						});	
+            });
+
+     }  
+   }
+   
+    function addAnimate() {
+    	$("#button-size").toggle(
+    		function () {
+    			$(".size-show").fadeIn(500);
+    		},
+    		function () {
+    			$(".size-show").fadeOut(500);
+    		}
+    	);
+    	
+	    //鼠标移上添加阴影效果	    
+	    $("#smallPic").children("ul").children("li").hover(
+			function () {
+				 curImg=$(this).css("backgroundImage");
+				
+				//当前中间大盒子显示的图片
+				$("#bigPic").css({
+					"backgroundImage":curImg,
+					"background-size":"100%"
+				});
+				$(this).css({
+					"position":"relative",
+					"box-shadow":"2px 3px 3px #ddd,2px 3px 3px #ddd,0px 10px 10px #ddd,-3px 5px 5px #ddd",
+					"top":"-2px"
+				   });
+                
+                $("#bigPic").mouseenter(function(){
+					singlton.getInstance({
+						//要放大的图片对应的dom元素
+						bigBoxDom:this,
+						//大图的src；要放大的效果的dom元素的背景图片
+						bigImg:curImg,			
+						//要放大图片的宽和高
+						bigBoxWidth:488,
+						bigBoxHeight:488,
+						//放大镜的宽和高
+						width:200,
+						height:200
+					});
+		        });		     
+		    },
+			function () {
+				$(this).css({
+					"box-shadow":"none",
+					"top":"0px"
+				   });
+		    });
+    	
+}		
+ 
+ function joinCar() {
+ 	   let count = 1;
+ 	   $("#less-count").click(function () {
+ 	   	    count--;
+ 	   	    if (count<=1) {
+ 	   	    	count =1;
+ 	   	    }
+ 	   	    $("#num").val(count);
+ 	   });
+ 	  $("#add-count").click(function () {
+ 	   	    count++;
+ 	   	     $("#num").val(count);
+ 	   }); 
+ 	   $("#num").val(count);
+ }
+ 
+</script>

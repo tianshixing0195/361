@@ -27,7 +27,7 @@
 		     			
 		     		</div>
 		     		<div id="right-details" class="l">
-		     			<h2></h2>
+		     			<h2><span id="goodsId"></span></h2>
 		     			<h3></h3>
 		     			<div class="products-price"><span>原价:<b></b></span>运费不包邮（<a href="#">运费详情</a>）</div>
 		     			<p class="products-color">颜色分类<span></span></p>
@@ -62,12 +62,19 @@
 		     				<input type="button" id="buynow" value="立即购买" />
 		     			</div>
 		     			<ul>
-		     				<li>收藏<span></span></li>
-		     				<li>分享<span></span></li>
+		     				<li>收藏<span id="collect"></span></li>
+		     				<li>分享<span id="share"></span></li>
 		     			</ul>
 		     			
 		     			
 		     		</div>
+		     	</section>
+		     	<section id="shop-details">
+		     		<ul class="top-nav">
+		     			<li>商品详情</li>
+		     			<li>商品评论</li>
+		     			<li>尺码说明</li>
+		     		</ul>
 		     	</section>
 		</main> 
 		
@@ -77,6 +84,7 @@
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
 <script type="text/javascript" src="../js/BigMirror.js" ></script>
+<script type="text/javascript" src="../js/tanchukuang.js" ></script>
 <script type="text/javascript">
 	
    $(function(){
@@ -92,7 +100,8 @@
 		
 		getData ();
 		joinCar();
-		 
+		//tanchukuang ();
+		
     });  
    
         //获取数据

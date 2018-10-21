@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			
+			<img id="goodsimg"  />
+			<p id="goodsname"></p>
+			<p id="goodsprice"></p>
+			<p id="goodscount"></p>			
+		</div>
+		<div>
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	//1、从cookie中读取商品编号goodsid
+	let goodsid = getCookie("goodsid");
+	
+	//2、发送ajax请求，获取商品信息
+	$.ajax({
+		type:"get",
+		url:"getGoodsInfo.php",
+		async:true,
+		data:{
+			"goodsId":goodsid
+		},
+		success:function(data){
+			$("#goodsname").html(data.goodsname);
+			$("#goodsprice").html(data.goodsprice);
+			$("#goodscount").html(data.goodscount);
+			$("#goodsimg").attr("src",data.goodsImg);
+		},
+		dataType:"json"
+	});	
+});
+
+</script>

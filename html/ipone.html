@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ipone</title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<link rel="stylesheet" type="text/css" href="../css/ipone.css"/>
+	</head>
+	<body>
+		
+	     <main>
+		        <div id="list">
+		     		<ul class="w top">
+		     			<li class="l">所有分类></li>
+		     			<li class="l"><a href="../index.html">首页></a></li>
+		     			<li class="l"><a href="shopList.html"/>商品列表></a></li>
+		     			<li class="l">手机</li>
+		     		</ul>
+		     	</div>
+		     	<section class="w">
+		     		<div id="smallPic" class="l">
+		     			<ul>
+		     			
+		     			</ul>
+		     		</div>
+		     		<div id="bigPic" class="l">
+		     			
+		     		</div>
+		     		<div id="right-details" class="l">
+		     			<h2></h2>
+		     			<p id="desc"></p>
+		     			<h3></h3>
+		     			<div class="products-price"><span>配送至:<b>西安南窑头千峰教育</b></span>运费不包邮（<a href="#">运费详情</a>）</div>
+		     			<p class="weight">重量<span></span></p>
+		     			<p class="products-color">颜色分类<span></span></p>
+		     			<ul class="products-color-choice">
+		     				
+		     			</ul>
+		     			<div class="products-size">
+		     				<div class="products-size-top">
+			     				<span>
+			     					<input type="button" id="less-count" value="-" />
+			     					<input type="text" id="num" value="1" />
+			     					<input type="button" id="add-count" value="+" />
+			     				</span>
+		     				</div>
+		     				
+		     				
+		     			</div>
+		     			
+		     			<div class="products-buy">
+		     				<input type="button" id="addshopcar" value="加入购物车" />
+		     				<input type="button" id="buynow" value="立即购买" />
+		     			</div>
+		     			<ul>
+		     				<li>收藏<span id="collect"></span></li>
+		     				<li>分享<span id="share"></span></li>
+		     			</ul>
+		     			
+		     			
+		     		</div>
+		     	</section>
+		     	
+		</main> 
+		
+		<footer style="margin-top: 50px;"></footer>
+	</body>
+</html>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
+<script type="text/javascript" src="../js/361base.js" ></script>
+<script type="text/javascript" src="../js/BigMirror.js" ></script>
+<script type="text/javascript" src="../js/tanchukuang.js" ></script>
+<script type="text/javascript">
+	
+   $(function(){
+//		
+//		//添加header和footer的html文件并引用Js.
+//		$("header").load("header.html",function(){
+//			addEvent()
+//		});
+//		
+//		$("footer").load("footer.html",function(){
+//			addEvent()
+//		});		
+		
+		getData ();
+		joinCar();
+		//tanchukuang ();
+		
+    });  
+   
+        //获取数据
+    function getData () {
+    	$.getJSON("../json/iponeX.json",function(data){
+    		console.log(data);
+    		initUI(data);
+    		updateUI(data);
+    		addAnimate();
+    		
+    	});
+    }
+    
+    //页面打开时初始化数据
+    function initUI (data) {
+    	let goodsList = data.CATALOG;
+        console.log(goodsList);
+        for (let i in goodsList) {
+            $("#right-details h2").text(goodsList[0].title);  //手机名
+            $("#desc").text(goodsList[0].huodong);
+            $("#right-details h3").text(goodsList[0].price);  //价格
+            $("#right-details .weight").children("span").text(goodsList[0].weight);  //重量
+					
+            let lists = goodsList[0].goods;
+            
+            $("#right-details .products-color ").children("span").text(lists[0].color);  //颜色
+             
+            for (let i in lists[0].imgurl ) {
+				let $liBox = $("<li></li>");				
+				$liBox.css({
+					"background-image":"url("+lists[0].imgurl[i]+")",
+					"background-position":"center",
+					"background-size":"100%",
+				});
+			     $("#smallPic ul").append($liBox);
+			     
+			    //中间大盒子的图片
+                $("#bigPic").css({
+					"backgroundImage":"url("+lists[0].imgurl[0]+")",
+					"background-size":"cover"
+						       
+				});			    
+		   }
+            
+            //尺寸展示盒子的图片
+            for (let i in lists) {            	
+            	let $li = $("<li></li>");
+            	let imgurls = lists[i].imgurl;
+            	  $li.css({
+							"backgroundImage":"url("+imgurls[0]+")",
+							"background-size":"cover"
+						       
+							});
+				            
+				 $("#right-details .products-color-choice").append($li);
+				
+            }    
+        }
+    }
+    //update 鼠标移上或点击时外观更新
+  //物品展示
+  function updateUI(data) {
+            
+        let goodsList = data.CATALOG;
+          //console.log(goodsList);
+        for (let i in goodsList) {								
+            let lists = goodsList[i].goods;
+
+             $("#right-details .products-color-choice").children("li").click(function () {
+            	let index = 0;
+                let lidom =  $(this).parent().children();
+                
+                for (i=0;i<lidom.length;i++) {
+                	if ($(lidom[i]).is($(this))) {
+                		index = i;
+                		console.log(index);
+                		let imgurls = lists[index].imgurl;
+                		$("#bigPic").css({
+                			
+							"backgroundImage":"url("+imgurls[0]+")",
+							"background-size":"cover"
+								       
+						});	
+                		
+                		$("#right-details .products-color").children("span").text(lists[index].color);  //颜色
+                		//console.log(lists[index].color);
+                		
+                		let showLi = $("#smallPic").children("ul").children("li");
+                		$(showLi).each(function (i) {
+                			$(this).css({
+										"background-image":"url("+imgurls[i]+")",
+										"background-position":"center",
+										"background-size":"100%",
+							    }); 
+                		})
+                	}
+                 
+                }
+            	
+            		$(this).css({
+							"border":"1px solid #f70",
+							"border-radius":"50%"
+						});
+						$(this).siblings().css({
+							"border":"0",
+							"border-radius":"0"
+						});	
+            });
+
+     }  
+   }
+   
+    function addAnimate() {
+    	$("#button-size").toggle(
+    		function () {
+    			$(".size-show").fadeIn(500);
+    		},
+    		function () {
+    			$(".size-show").fadeOut(500);
+    		}
+    	);
+    	
+	    //鼠标移上添加阴影效果	    
+	    $("#smallPic").children("ul").children("li").hover(
+			function () {
+				 curImg=$(this).css("backgroundImage");
+				
+				//当前中间大盒子显示的图片
+				$("#bigPic").css({
+					"backgroundImage":curImg,
+					"background-size":"100%"
+				});
+				$(this).css({
+					"position":"relative",
+					"box-shadow":"2px 3px 3px #ddd,2px 3px 3px #ddd,0px 10px 10px #ddd,-3px 5px 5px #ddd",
+					"top":"-2px"
+				   });
+                
+                $("#bigPic").mouseenter(function(){
+					singlton.getInstance({
+						//要放大的图片对应的dom元素
+						bigBoxDom:this,
+						//大图的src；要放大的效果的dom元素的背景图片
+						bigImg:curImg,			
+						//要放大图片的宽和高
+						bigBoxWidth:488,
+						bigBoxHeight:488,
+						//放大镜的宽和高
+						width:200,
+						height:200
+					});
+		        });		     
+		    },
+			function () {
+				$(this).css({
+					"box-shadow":"none",
+					"top":"0px"
+				   });
+		    });
+    	
+}		
+ 
+ function joinCar() {
+ 	   let count = 1;
+ 	   $("#less-count").click(function () {
+ 	   	    count--;
+ 	   	    if (count<=1) {
+ 	   	    	count =1;
+ 	   	    }
+ 	   	    $("#num").val(count);
+ 	   });
+ 	  $("#add-count").click(function () {
+ 	   	    count++;
+ 	   	     $("#num").val(count);
+ 	   }); 
+ 	   $("#num").val(count);
+ }
+ 
+</script>

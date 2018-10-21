@@ -1,7 +1,7 @@
 {
     "CATALOG": [
         {
-            "title": "新品推荐",
+            "h2": "新品推荐",
             "goods": [
                 {   "imgurl" :["../img/shopImg/m_5a1faa0483d2c.jpg","../img/shopImg/m_5a1faa05c23db.jpg","../img/shopImg/m_5a1faa070d5cf.jpg","../img/shopImg/m_5a1faa0850a6b.jpg"],
 			        "title" : "男常规跑鞋",

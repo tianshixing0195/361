@@ -1,0 +1,301 @@
+@charset "utf-8";
+
+//全局变量
+$Width:350px;
+$Height:350px;
+$bgColor:white;
+$color:black;
+$bordeRadius:50%;
+$pHeight:30px;
+$font-size:16px;
+$bordeRadius:5px;
+$border:1px solid #bbb;
+$marginWidth:20px ;
+$marginHeight:20px;
+
+#list{
+    width: 100%;
+    
+    margin-top: 50px;
+    margin-bottom: 40px;
+    .top{
+        height: 26px;
+       // background: red;
+        margin-bottom:$marginWidth;
+        li{  height:26px;
+             line-height:26px;
+             color: black;
+             //background: #55A532;
+             font-size: 12px;
+             a{
+                 color: #bbb;
+             }
+        }
+        li:first-of-type{
+            color: #bbb;
+        } 
+    } 
+}
+
+section{
+    width: 100%;
+    height: 570px;
+   // height:488px;
+    //border:$border;
+    margin-top: 30px;
+   
+}
+   
+  #smallPic{
+       width: 110px;
+       height: 488px;
+       //background: burlywood;
+       
+       ul{
+           width: 100%;
+           height: auto;
+           
+           li{
+               width: 108px;
+               height: 108px;
+               border: $border;
+               //background:greenyellow ;
+               margin-bottom: 16px;
+           }
+       }
+        
+    }
+ #bigPic{
+     position: relative;
+     width: 488px;
+     height: 488px;
+     border: $border;
+     margin-left: 15px;
+//   background:url(../img/manshoseImg/5a1faa0483d2c.jpg);
+//   background-size:100%;
+ }
+#right-details{
+    width: 540px;
+    height: 100%;
+   // border: $border;
+    margin-left: 5px;
+    //background: blueviolet;
+    
+    h2{
+        width:100%;
+        height: 41px;
+        line-height: 41px;
+        text-align: center;
+        font-weight: normal;
+        font-size: 20px;
+    }
+    h3{
+        height: 31px;
+        line-height: 31px;
+        font-size: 21px;
+        text-align: center;
+    }
+    .products-price{
+        text-align: center;
+        height: 14px;
+        //background: yellowgreen;
+        margin: 17px 0;
+        span{
+          // background: gold;
+           margin:0 20px;
+           
+           b{
+              // text-decoration: line-through;
+           } 
+           
+        }
+        span:nth-of-type(1){
+            font-weight: bold;
+           }
+        span:nth-of-type(2){
+           color:#ccc;
+       }
+            
+    }
+    p{
+        height: 12px;
+        margin-bottom: 15px;
+        //background: yellowgreen;
+        text-align: center;
+        
+        span{
+          margin-left: 20px;
+          font-weight: bold;  
+        }
+    }
+    .products-color-choice{
+        height: 68px;
+        width: 100%;
+       // background: goldenrod;
+        text-align: center;
+        li{
+            height: 45px;
+            width: 45px;
+            display: inline-block;
+            cursor: pointer;
+           // background: red;
+            margin: 11px;
+        }
+    }
+    .products-size{
+        width: 100%;
+       // height: 180px;
+        //background: yellowgreen;
+        
+        .products-size-top{
+            height: 32px;
+           // background: brown;
+            margin-bottom: 10px;
+            text-align: center;
+            span{
+                width: 132px;
+                height: 32px;
+                margin-left:30px;
+                cursor: pointer;
+                
+            }
+        }
+        .size-show{
+            margin:0 auto;
+            width: 380px;
+            height: 100px;
+            background: #ddd;
+            border-radius: 2px;
+            padding: 20px 0;
+            margin-top: 2px;
+            display: none;
+            
+            li{
+               width: 48px;
+               height: 28px;
+               line-height: 28px;
+               text-align: center;
+               margin: 10px;
+               background:darkgray ;
+               float: left; 
+               cursor: pointer; 
+            }
+        }
+    }
+    
+    .products-buy{
+        width: 100%;
+        height: 120px;
+       // background: #55A532;
+        text-align: center;
+        
+        input{
+             width: 160px;
+            height: 40px;
+            cursor: pointer;
+            margin: 35px 15px 35px 0;
+            border-radius: 5px;
+            border: 0;
+        }
+    }
+   
+    ul{
+      width: 100%;
+      height: 12px;
+      text-align: center;
+     
+     
+     li{
+         display: inline-block;
+         width: 60px;
+         cursor: pointer;
+         span{
+            width:12px;
+            height: 12px;
+            margin-left: 10px;
+            margin-top: 2px;
+            display: inline-block;
+         }
+         
+        } 
+        li:nth-of-type(1) span{
+           
+            background: url(../img/manshoseImg/collection.png) center no-repeat;
+            background-size: cover;
+        } 
+        li:nth-of-type(2) span{
+            background: url(../img/manshoseImg/share.png) center no-repeat;
+            background-size: cover;
+        }   
+    }
+}
+
+#button-size{
+    width: 110px;
+    height: 32px;
+    border: 0;
+    background: #ddd;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+} 
+#less-count{
+    width: 30px;
+    height: 30px;
+    border:0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+#add-count{
+    width: 30px;
+    height: 30px;
+    border:0;
+    border-radius: 2px;
+    cursor: pointer;
+     
+}
+#num{
+    text-align: center;
+    width: 45px;
+    height: 30px;
+    border: 0;
+    background: #ddd;
+}
+#massage{
+    width: 300px;
+    height: 20px;
+    line-height: 20px;
+   // background: #0086B3;
+    display: block;
+    color:red;
+    margin: 5px auto;
+}
+#addshopcar{
+    border: 1px solid #f70;
+}
+#addshopcar:hover{
+    
+   background:#f70;
+}
+#buynow{
+    background: #f70;
+}
+
+#shop-details .top-nav{
+    height: 32px;
+    line-height: 32px;
+    border-bottom: $border;
+    //background: yellowgreen;
+    text-align: center;
+    
+    li{
+        display: inline-block;
+        width: 200px;
+        margin: 0 20px;
+        cursor:pointer; 
+        
+        &:hover{
+            border-bottom: 2px solid #f70;
+        }
+    }
+}

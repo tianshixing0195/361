@@ -1,0 +1,22 @@
+{
+    "CATALOG": [
+        {
+            "title": "Apple iPhone X (A1865) 64GB 银色 移动联通电信4G手机 ",
+            "huodong":"【购iPhone XS系列享12期白条免息！】全面屏，面容ID，智慧之选，全面绽放。iPhone XR炫彩来袭，10月19日15:01开启预购！",
+            "price":"￥7099.00",
+            "weight":"0.44kg",
+            "goods": [
+                {  
+                	 "imgurl" :["../img/AppleX/59e42831N83d658b3.jpg","../img/AppleX/59e42823N6ab33bf2.png","../img/AppleX/59e42830N1afe7736.jpg","../img/AppleX/59e42830N9da56c41.jpg"],
+			        "color" : "银色"
+			        
+                },
+                {   "imgurl" :["../img/AppleX/59df2e7fN86c99a27.jpg","../img/AppleX/5a015111Nca2a2e87.png","../img/AppleX/59facb81N2f04589e.png","../img/AppleX/59e42823N6ab33bf2.jpg"],
+			        "color" : "深空灰色"
+			        
+                }
+               
+            ]
+        }
+    ]
+}   
