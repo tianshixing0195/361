@@ -20,7 +20,7 @@
      			<div class="w">
      				<ul>
      					<span class="l">产品分类</span>
-     					<li class="l"><a href="manshose1.html">鞋</a></li>
+     					<li class="l"><a href="shopDetail高级.html">鞋</a></li>
      					<li class="l"><a href="#">上装</a></li>
      					<li class="l"><a href="#">下装</a></li>
      					<li class="l"><a href="#">泳镜</a></li>
@@ -71,7 +71,7 @@
      				<li class="l"><a href="">价格</a></li>
      			</ul>
      		</div>
-	     
+	     <section class="w"></section>
 		</main> 
 		
 		<footer style="margin-top: 50px;"></footer>
@@ -79,6 +79,7 @@
 </html>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
+<script type="text/javascript" src="../js/cookieTools.js" ></script>
 <script type="text/javascript">
 	
    $(function(){
@@ -99,8 +100,8 @@
     //给每个商品添加一个事件
 function goGoodsDetail(obj){
 	let goodsid = obj.getAttribute("goodsid");
-	saveCookie("goodsid",goodsid);
-	window.open("goodsdetail.html");
+	addCookie("goodsid",goodsid,14);
+	window.open("shopDetail高级.html");
 	
 }
     //获取数据
@@ -120,44 +121,18 @@ function goGoodsDetail(obj){
     //物品展示
     function createUI(data) {
         
-        let goodsList = data.CATALOG;
-         console.log(goodsList);
-        for (let i in goodsList) {
-        	let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
-        	  $sectionBox.css({
-								width: "100%",
-								"height":"auto",
-						        "margin-bottom":"20px",
-                                "position":"relative",
-							});
-            $("main").append($sectionBox); 
-        
-//               //创建标题和商品盒子
-//      	    let $h2 = $("<h2></h2>");
-//    	      $h2.css({
-//						    width: "100%",
-//						    height:"66px",						        
-//						    "line-height": "66px",
-//					        "font-size": "26px",
-//					       "font-weight":" normal",
-//					        "padding-left": "20px"
-//					       
+        let goodsList = data;
+//       console.log(goodsList);
+//       let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
+//      	  $sectionBox.css({
+//								width: "100%",
+//								"height":"auto",
+//						        "margin-bottom":"20px",
+//                              "position":"relative",
 //							});
-//      	    $h2.text(goodsList[i].h2);
-        	    
-        	    let $shopBox = $("<div></div>");
-        	     $shopBox.css({
-								width: "100%",
-						        height:"auto"
-						       
-						      
-							});
-        	    //$sectionBox.append($h2);
-        	    $sectionBox.append($shopBox);     
-         
-        	    let lists = goodsList[i].goods;
-        	    for (let i in lists ) {
-        	    	
+//          $("main").append($sectionBox); 
+        for (let i in goodsList) { 
+        	
         	    	//单个商品显示的盒子
     	            let $oneShopBigBox = $("<div></div>");
     	                 $oneShopBigBox.css({
@@ -175,7 +150,7 @@ function goGoodsDetail(obj){
 						        "margin-left":"10px",
 						        "margin-right":"30px"
 							});
-					  $shopBox.append($oneShopBigBox);		
+					  $("section").append($oneShopBigBox);		
     	            let $oneShopBox = $("<div></div>");
     	                 $oneShopBox.css({
     	                 	   
@@ -197,15 +172,20 @@ function goGoodsDetail(obj){
         	    		
         	    		//创建商品显示的盒子
         	    		let $imgBox = $("<div></div>");
-        	    		let imgurls = lists[i].imgurl;
-        	    		 
+        	    		let imgDatas = goodsList[i].goodsImg;
+        	    		let imgurls = imgDatas.split(",");
+        	    		 console.log(imgurls);
         	    		   $imgBox.css({
         	    		   	    width: "100%",
                                 height: "350px",
-								"backgroundImage":"url("+imgurls[0]+")",
+								"backgroundImage":"url(../img/manshoseImg/"+imgurls[0]+")",
 								"background-size":"cover"		    
 							});
-						 $oneShopBox.append($imgBox);	
+						 $oneShopBox.append($imgBox);
+						 $imgBox.attr("goodsid",goodsList[i].goodsId);
+						 $imgBox.click(function(){
+						 	   goGoodsDetail(this);
+						 })
 					    //下方小图片的盒子
 						//ul
 						let $ulBox = $("<ul></ul>");
@@ -254,7 +234,7 @@ function goGoodsDetail(obj){
 						
 										
 						//li
-						for(let i=0;i<imgurls.length;i++){
+						for(let i=0;i<4;i++){
 						    let $liBox = $("<li></li>");
 								$liBox.css({
 									width: "60px",
@@ -262,7 +242,7 @@ function goGoodsDetail(obj){
 						            margin:"0 10px",
 						            "background-size": "100%", 
 									float:"left",
-									"backgroundImage":"url("+imgurls[i]+")",
+									"backgroundImage":"url(../img/manshoseImg/"+imgurls[i]+")",
 									"background-position":"center"
 								});
 								$ulBox.append($liBox);
@@ -282,7 +262,7 @@ function goGoodsDetail(obj){
 					            "margin-top": "14px"
 				           
 						    });
-							$titleBox.text(lists[i].title);
+							$titleBox.text(goodsList[i].goodsName);
 							$oneShopBox.append($titleBox);
 						
 						//价格的盒子
@@ -296,13 +276,13 @@ function goGoodsDetail(obj){
 				            "padding-top": "14px"
 				           
 						});
-						$priceBox.text(lists[i].price);
+						$priceBox.text('￥'+goodsList[i].goodsPrice);
 						$oneShopBox.append($priceBox);
         	    	}
         	 	
         	}   
         	
        
-    }
+    
     
 </script>

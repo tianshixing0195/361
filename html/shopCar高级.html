@@ -23,46 +23,46 @@
 					<li>操作</li>
 				</ul>
 				<!--购物车内容-->
-		        <section id="goodsMessage">
-		        	<div class="shop-details">
+		        <section id="shop-details">
+		        	<div >
 		        		
 		        		<!--单选反选按钮-->
-		        		<div class="choose">
-		        		   <input type="checkbox"/>
+		        		<div class="l choose">
+		        		    <span></span>
 		        		</div>
 		        		
 		        		<!--商品的详情-->
-		        		<dl>
-		        			<dt><img src="../img/manshoseImg/5a1faa0483d2c.jpg "/></dt>
-		        			<dd>
-		        				<h3>男常规跑鞋</h3>
+		        		<dl class="l">
+		        			<dt class="l"><img src="../img/manshoseImg/5a1faa0483d2c.jpg "/></dt>
+		        			<dd class="l">
+		        				<h3 id="goods-name">男常规跑鞋</h3>
 		        				<ul>
-		        					<li>颜色：<span>361°白/运动兰</span></li>
-		        					<li>尺寸：<span>39</span></li>
+		        					<li>颜色：<span id="goods-color">361°白/运动兰</span></li>
+		        					<li>尺寸：<span id = "goods-size">39</span></li>
 		        				</ul>
 		        			</dd>
 		        		</dl>
 		        		
 		        		<!--商品的价格-->
-		        		<div class="goods-price">
+		        		<div class="l goods-price">
 		        			<h4>299</h4>
 		        			<p>0.00</p>
 		        		</div>
 		        		
 		        		<!--数量-->
-		        		<div class="goods-number-change">
-		        			<button class="less-count"></button>
-		        			<input type="text" class="num" value="1" />
-		        			<button class="add-count"></button>
+		        		<div class="l goods-number-change">
+		        			<button id="less-count"></button>
+		        			<input type="text" id="num" value="1" />
+		        			<button id="add-count"></button>
 		        		</div>
 		        		
 		        		<!--小计-->
-		        		<div class="subTotal">
+		        		<div class="l subTotal">
 		        			<p>299.00</p>
 		        		</div>
 		        		
 		        		<!--操作-->
-		        		<div class="operate">
+		        		<div class="l operate">
 		        			<h4>移到收藏夹</h4>
 		        			<p>删除</p>
 		        		</div>
@@ -73,9 +73,9 @@
 		       <div id="allgoods">
 		       	  <!--全选按钮-->
 		        		<div class="chooseAll">
-		        		    <input type="checkbox" name="all" id="all"/>
-		        		    <p>全选 购物车共<b>3</b>件商品，已选 <a>0</a>件产品</p>	
-       		   
+		        		    <span class="all">全选</span>
+		        		    购物车共<b>3</b>件商品，已选
+		        		    <a>0</a>件产品	        		   
 		        		</div>
 		        		
 		        		<!--总价-->
@@ -107,9 +107,7 @@
 
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/getStyle.js" ></script>
-<script type="text/javascript" src="../js/cookieTools.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
-<script type="text/javascript" src="../js/shopCar.js" ></script>
 
 <script type="text/javascript">
 	
@@ -125,7 +123,7 @@
 		  getData ();
 		//价格计算
 		calculatePrice();
-		shanchukuang();
+		shanchukuang ();
 		
 //		//单选全选
 //		$("#allgoods .chooseAll ").children("span").bindCheck($(".choose span"));
@@ -135,9 +133,10 @@
 	//获取商品信息
 	let goodsid = getCookie("goodsid");
 	let userName = getCookie("userId");
+	
 	function getData () {
 		  //1、从cookie中读取商品编号用户名
-		 let userName = getCookie("userId");
+		 //let userName = getCookie("userId");
 			
 			//2、发送ajax请求，获取商品信息
 			$.ajax({
@@ -149,8 +148,7 @@
 				},
 				success:function(data){
 					console.log(data);
-					
-		    		createCar(data);
+		    		initUI(data);
 		    		
 				},
 				dataType:"json"
@@ -202,6 +200,10 @@
 		    $(".settle b").html(subPrice);
 	  });
 	
+   
+    
+    
+    
     }
 	
 	//1.数量增加  计算价格
@@ -222,7 +224,14 @@
             
             //单个商品的总价：
 		    $(".settle b").html(subPrice);
-	   });
+	    });
+	
+	//把数量再重新赋给input
+   // count = $(".goods-number-change").children("input").val();
+    
+   
+    
+    
     }
 	
 	function shanchukuang () {

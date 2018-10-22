@@ -71,7 +71,8 @@
      				<li class="l"><a href="">价格</a></li>
      			</ul>
      		</div>
-	     
+     		<section class="w"></section>
+	        
 		</main> 
 		
 		<footer style="margin-top: 50px;"></footer>
@@ -100,9 +101,10 @@
    
     //获取数据
     function getData () {
-    	$.getJSON("../json/allshopList.json",function(data){
+    	$.getJSON("../json/allshopList1.json",function(data){
     		console.log(data);
     		createUI(data);
+    		
     		
     	})
     }
@@ -113,15 +115,15 @@
         let goodsList = data.CATALOG;
          console.log(goodsList);
         for (let i in goodsList) {
-        	let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
-        	  $sectionBox.css({
-								width: "100%",
-								"height":"auto",
-						        "margin-bottom":"20px",
-                                "position":"relative",
-							});
-            $("main").append($sectionBox); 
-        
+//      	let $sectionBox = $("<section></section>");  //创建section大盒子，并添加到main里
+//      	  $sectionBox.css({
+//								width: "100%",
+//								"height":"auto",
+//						        "margin-bottom":"20px",
+//                              "position":"relative",
+//							});
+//          $("main").append($sectionBox); 
+//      
 //               //创建标题和商品盒子
 //      	    let $h2 = $("<h2></h2>");
 //    	      $h2.css({
@@ -143,7 +145,7 @@
 						      
 							});
         	    //$sectionBox.append($h2);
-        	    $sectionBox.append($shopBox);     
+        	    $("section").append($shopBox);     
          
         	    let lists = goodsList[i].goods;
         	    for (let i in lists ) {
@@ -188,7 +190,7 @@
         	    		//创建商品显示的盒子
         	    		let $imgBox = $("<div></div>");
         	    		let imgurls = lists[i].imgurl;
-        	    		 
+        	    		 console.log(imgurls);
         	    		   $imgBox.css({
         	    		   	    width: "100%",
                                 height: "350px",

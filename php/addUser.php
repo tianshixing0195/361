@@ -27,6 +27,6 @@
 	mysql_close($con);
 	
 	//三、给前端响应
-	//echo "1";
+	echo "1";
 
 ?>

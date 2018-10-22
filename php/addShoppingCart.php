@@ -11,7 +11,7 @@
 	$conn = mysql_connect("localhost","root","root");
 	
 	//2）、选择数据库（找目的地）
-	if(!mysql_select_db("root",$conn)){
+	if(!mysql_select_db("361db",$conn)){
 		die("数据库选择失败".mysql_error());
 	};
 	

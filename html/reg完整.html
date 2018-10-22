@@ -55,26 +55,10 @@
 		
 		
 		//发送请求和用户名验证
-		   sendData ();
+		    sendData ();
         //点击按钮进行验证和
 		 $("#loginBtn").click(function(){
             checkAll (); 
-            
-            
-            //添加用户名
-            $.post(
-				"../php/addUser.php",
-				{
-					"userId":$("#username").val(),
-					"userPass":$("#userpass").val(),
-					"userPhone":$("#phoneNum").val()
-				},
-				function(data){					
-					if (data=="1") {
-					  location.href = "login.html";
-					}
-				}
-			);
             
            }) ;
            
@@ -152,70 +136,106 @@
               //1.用户名
             let name = $("#username").val();
             let matchResult1 = regusername.test(name);
+            //手机号
+            let userphone = $("#phoneNum").val();
+	        let matchResult2 = regphone.test(userphone);
+	        
+	         //3.验证码
+            let code = $("#code").val();
+            let matchResult3 = regcode.test(code);
+            
+            	  
+           	//4.密码
+            let pass1 = $("#userpass").val();
+		    let pass2 = $("#samePass").val();
+            let matchResult4 = regpass.test(pass1);
+            
+            //用户名
            	 if(!matchResult1){
            	 	 $("#userspan").css({
            	 	     "display":"block"	
            	 	 });
                  $("#userspan").text("*昵称不能为空");
-           	 }
-           	   //2.手机号
-           	let userphone = $("#phoneNum").val();
-           	if (userphone != "") {
-           		//let test2 = CheckAll('phone',userphone);
-           		let matchResult2 = regphone.test(userphone);
-		           	 if(!matchResult2){
-		           	 	 $("#cellspan").css({
+           	 }else{
+           	 	
+	           	 	   //2.手机号
+	           	
+	           	if (userphone == "") {
+	           		 $("#cellspan").css({
+			           	 	     "display":"block"	
+			           	 	 });
+	           		  $("#cellspan").text("*手机号码不能为空");
+	           		
+	           	}else if(!matchResult2){
+
+	           	 	 $("#cellspan").css({
+	           	 	     "display":"block"	
+	           	 	 });
+	                 $("#cellspan").text("*请输入正确的手机号码");
+	                 
+	           	}else{
+	           		
+			           		 //3.验证码
+		            
+		           	if (code == "") {
+		           		
+		           		 $("#codespan").css({
+				           	 	     "display":"block"	
+				           	 	 });
+		           		  $("#codespan").text("*验证码不能为空");
+
+		           	}else if(!matchResult3){
+		           		$("#codespan").css({
 		           	 	     "display":"block"	
 		           	 	 });
-		                 $("#cellspan").text("*请输入正确的手机号码");
-		           	 }
-           	}else{
-           		  $("#cellspan").css({
-		           	 	     "display":"block"	
-		           	 	 });
-           		  $("#cellspan").text("*手机号码不能为空");
+		                 $("#codespan").text("*请输入正确的验证码"); 
+		           	}else{
+		           		
+		           			//4.密码
+			          
+			           	if (pass1 == "") {
+				           		  $("#passSpan").css({
+						           	 	     "display":"block"	
+						           	 	 });
+				           		  $("#passSpan").text("*密码不能为空");
+
+			           	}else if(!matchResult4){
+			           		  $("#passSpan").css({
+					           	 	     "display":"block"	
+			           	 	 });
+			                 $("#passSpan").text("*请输入正确的密码");
+			           	}else if (pass1!=pass2) {
+			           		$("#samePassSpan").css({
+					           	 	     "display":"block"	
+					           	 	 });
+			           		$("#samePassSpan").text("*两次输入的密码不一致，请重新输入");
+			           	}else{
+			           		
+			           		     //添加用户名
+					            $.post(
+									"../php/addUser.php",
+									{
+										"userId":$("#username").val(),
+										"userPass":$("#userpass").val(),
+										"userPhone":$("#phoneNum").val()
+									},
+									function(data){					
+										if (data=="1") {
+										  location.href = "../index.html";
+										}
+									}
+								);
+            
+			           	}
+			           	
+		           	}
+	           	}
+	           
            	}
+           	
            
-           	   //3.验证码
-            let code = $("#code").val();
-           	if (code != "") {
-           		let matchResult3 = regcode.test(code);
-		           	 if(!matchResult3){
-		           	 	 $("#codespan").css({
-		           	 	     "display":"block"	
-		           	 	 });
-		                 $("#codespan").text("*请输入正确的验证码");
-		           	 }
-           	}else{
-           		  $("#codespan").css({
-		           	 	     "display":"block"	
-		           	 	 });
-           		  $("#codespan").text("*验证码不能为空");
-           	};
-           	//4.密码
-            let pass1 = $("#userpass").val();
-		    let pass2 = $("#samePass").val();
-		    
-           	if (pass1 != "") {
-           		let matchResult4 = regpass.test(pass1);
-		           	 if(!matchResult4){
-		           	 	 $("#passSpan").css({
-		           	 	     "display":"block"	
-		           	 	 });
-		                 $("#passSpan").text("*请输入正确的密码");
-		           	 }
-           	}else{
-           		  $("#passSpan").css({
-		           	 	     "display":"block"	
-		           	 	 });
-           		  $("#passSpan").text("*密码不能为空");
-           	};
-           	if (pass1!=pass2) {
-           		$("#samePassSpan").css({
-		           	 	     "display":"block"	
-		           	 	 });
-           		$("#samePassSpan").text("*两次输入的密码不一致，请重新输入");
-           	}
+           	  
+           
            	
 	}
 	function sendData () {

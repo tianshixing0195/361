@@ -27,7 +27,7 @@
 		     			
 		     		</div>
 		     		<div id="right-details" class="l">
-		     			<h2><span id="goodsId"></span></h2>
+		     			<h2><b></b><span>(<a></a>)</span></h2>
 		     			<h3></h3>
 		     			<div class="products-price"><span>原价:<b></b></span>运费不包邮（<a href="#">运费详情</a>）</div>
 		     			<p class="products-color">颜色分类<span></span></p>
@@ -39,7 +39,7 @@
 		     					<input type="button" id="button-size" value="尺码选择    -" />
 			     				<span>
 			     					<input type="button" id="less-count" value="-" />
-			     					<input type="text" id="num" value="1" />
+			     					<input type="text" id="num" value="" />
 			     					<input type="button" id="add-count" value="+" />
 			     				</span>
 		     				</div>
@@ -84,7 +84,7 @@
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="../js/361base.js" ></script>
 <script type="text/javascript" src="../js/BigMirror.js" ></script>
-<script type="text/javascript" src="../js/tanchukuang.js" ></script>
+<script type="text/javascript" src="../js/cookieTools.js" ></script>
 <script type="text/javascript">
 	
    $(function(){
@@ -119,13 +119,13 @@
 			//2、发送ajax请求，获取商品信息
 			$.ajax({
 				type:"get",
-				url:"getGoodsInfo.php",
+				url:"../php/getGoodsInfo.php",
 				async:true,
 				data:{
 					"goodsId":goodsid
 				},
 				success:function(data){
-					console.log(data);
+					//console.log(data);
 		    		initUI(data);
 		    		updateUI(data);
 		    		addAnimate();
@@ -148,13 +148,13 @@
 				data:{
 					"goodsId":goodsid,
 					"vipName":userName,
-					"goodsCount":$("#num").val();
+					"goodsCount":$("#num").val()
 				},
 				success:function(data){
 					console.log(data);
 		    		
 				},
-				dataType:"json"
+				//dataType:"json"
 			});	
     	
     }
@@ -162,40 +162,51 @@
     
     //页面打开时初始化数据
     function initUI (data) {
-    	let goodsList = data.CATALOG;
-        console.log(goodsList);
-        for (let i in goodsList) {
-            $("#right-details h2").text(goodsList[0].title);  //鞋名
-            $("#right-details h3").text(goodsList[0].price);  //价格
-            $("#right-details .products-price span").children("b").text(goodsList[0].currPrice);  //原价
+    	let goodsList = data;
+          //console.log(goodsList);
+       
+            $("#right-details h2").children("b").html(goodsList.goodsName);  //鞋名
+            $("#right-details h2 span").children("a").html(goodsList.goodsId)
+            $("#right-details h3").html(goodsList.goodsPrice);  //价格
+            $("#right-details .products-price span").children("b").text(goodsList.beiyong2);  //原价
 					
-            let lists = goodsList[0].goods;
-            
-            $("#right-details .products-color ").children("span").text(lists[0].color);  //颜色
+            let colors = goodsList.beiyong1.split(",");
+           
+            $("#right-details .products-color ").children("span").html(colors[0]);  //颜色
              
-            for (let i in lists[0].imgurl ) {
-				let $liBox = $("<li></li>");				
-				$liBox.css({
-					"background-image":"url("+lists[0].imgurl[i]+")",
+             //图片显示
+             let allimgs = goodsList.goodsImg.split(",");
+             
+             //
+            for (let i=0;i<4;i++) {
+            	$liBox = $("<li></li>");
+            	
+            	
+            	$liBox.css({
+					"background-image":"url(../img/manshoseImg/"+allimgs[i]+")",
 					"background-position":"center",
 					"background-size":"100%",
 				});
 			     $("#smallPic ul").append($liBox);
+            }
+					
+				
 			     
 			    //中间大盒子的图片
                 $("#bigPic").css({
-					"backgroundImage":"url("+lists[0].imgurl[0]+")",
+					"backgroundImage":"url(../img/manshoseImg/"+allimgs[0]+")",
 					"background-size":"cover"
 						       
 				});			    
-		   }
+		   
             
-            //尺寸展示盒子的图片
-            for (let i in lists) {            	
+            //颜色展示盒子的图片
+            let n = colors.length;
+            for (let i=0;i<n;i++) {            	
             	let $li = $("<li></li>");
-            	let imgurls = lists[i].imgurl;
+            	$li.attr("index",i);
             	  $li.css({
-							"backgroundImage":"url("+imgurls[0]+")",
+							"backgroundImage":"url(../img/manshoseImg/"+allimgs[n*i]+")",
 							"background-size":"cover"
 						       
 							});
@@ -203,48 +214,42 @@
 				 $("#right-details .products-color-choice").append($li);
 				
             }    
-        }
-    }
+        
+   }
     //update 鼠标移上或点击时外观更新
   //物品展示
   function updateUI(data) {
             
-        let goodsList = data.CATALOG;
-          //console.log(goodsList);
-        for (let i in goodsList) {								
-            let lists = goodsList[i].goods;
+       let goodsList = data;
+          console.log(goodsList);
+          
+          let colors = goodsList.beiyong1.split(",");
+          let n = colors.length;
+          let allimgs = goodsList.goodsImg.split(",");
+           console.log(allimgs.length)
+           $("#right-details .products-color-choice").children("li").click(function () {
+            	let index = this.getAttribute("index");
+            	console.log(index);
 
-             $("#right-details .products-color-choice").children("li").click(function () {
-            	let index = 0;
-                let lidom =  $(this).parent().children();
-                
-                for (i=0;i<lidom.length;i++) {
-                	if ($(lidom[i]).is($(this))) {
-                		index = i;
-                		console.log(index);
-                		let imgurls = lists[index].imgurl;
                 		$("#bigPic").css({
                 			
-							"backgroundImage":"url("+imgurls[0]+")",
+							"backgroundImage":"url(../img/manshoseImg/"+allimgs[n*index]+")",
 							"background-size":"cover"
 								       
 						});	
                 		
-                		$("#right-details .products-color").children("span").text(lists[index].color);  //颜色
+                		$("#right-details .products-color").children("span").html(colors[index]);  //颜色
                 		//console.log(lists[index].color);
                 		
                 		let showLi = $("#smallPic").children("ul").children("li");
                 		$(showLi).each(function (i) {
                 			$(this).css({
-										"background-image":"url("+imgurls[i]+")",
+										"background-image":"url(../img/manshoseImg/"+allimgs[n*index+i]+")",
 										"background-position":"center",
 										"background-size":"100%",
 							    }); 
-                		})
-                	}
-                 
-                }
-            	
+                		});
+                		//鼠标点击的图片的样式
             		$(this).css({
 							"border":"1px solid #f70",
 							"border-radius":"50%"
@@ -255,8 +260,8 @@
 						});	
             });
 
-     }  
-   }
+    }  
+  
    
     function addAnimate() {
     	$("#button-size").toggle(
